@@ -3,7 +3,7 @@ import { createBrowserRouter, Route, createRoutesFromElements } from 'react-rout
 import RootLayout from './RootLayout';
 import SearchPage from '../searchPage/SearchPage';
 import NotFoundPage from '../notFoundPage/NotFoundPage';
-import FavoritesPage from './favoritesPage/FavoritesPage';
+import FavoritesPage from '../favoritesPage/FavoritesPage';
 
 const router = createBrowserRouter(
   createRoutesFromElements(

@@ -1,0 +1,26 @@
+@use '../../styles' as *;
+
+.header {
+  width: 100%;
+  background-color: $white;
+  margin-bottom: 2.5rem;
+}
+
+.header__wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 5.25rem;
+}
+
+.header__wrapper,
+.main {
+  max-width: 69.75rem;
+  margin: 0 auto;
+}
+
+.empty {
+  display: block;
+  width: 13.6rem;
+}

@@ -1,20 +1,22 @@
 import React from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
+import Logo from './UI/Logo';
+import Navigation from './UI/Navigation';
+import './RootLayout.scss';
 
 export default function RootLayout() {
   return (
     <div className="root__layout">
-      <header>
-        <nav className="navigation">
-          <NavLink to="/" className={'navigation__item'}>
-            Поиск Вакансий
-          </NavLink>
-          <NavLink to="favorites" className={'navigation__item'}>
-            Избранное
-          </NavLink>
-        </nav>
+      <header className="header">
+        <div className="header__wrapper">
+          <Logo />
+          <Navigation />
+          <span className="empty"></span>
+        </div>
       </header>
-      <Outlet />
+      <main className="main">
+        <Outlet />
+      </main>
     </div>
   );
 }
