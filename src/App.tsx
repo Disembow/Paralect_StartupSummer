@@ -1,11 +1,13 @@
 import React from 'react';
 import './App.scss';
-import { MantineProvider, Text } from '@mantine/core';
+import { MantineProvider } from '@mantine/core';
+import { RouterProvider } from 'react-router';
+import router from './components/layouts/Router';
 
 const App = () => {
   return (
     <MantineProvider withGlobalStyles withNormalizeCSS>
-      <Text>Welcome to Mantine!</Text>
+      <RouterProvider router={router} />
     </MantineProvider>
   );
 };
