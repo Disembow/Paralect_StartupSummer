@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './Filters.module.scss';
+import styles from './Filters.module.scss';
 import { Select, CloseButton, NumberInput, Button } from '@mantine/core';
 
 const Filters = () => {
@@ -14,13 +14,13 @@ const Filters = () => {
       onSubmit={(e) => {
         e.preventDefault();
       }}
-      className={style.filters__container}
+      className={styles.filters__container}
     >
-      <div className={style.filters__header}>
-        <h4 className={style.filters__title}>Фильтры</h4>
-        <div className={style.button__cross}>
-          <p className={style.button__title}>Сбросить все</p>
-          <CloseButton aria-label="Close modal" className={style.cross__item} />
+      <div className={styles.filters__header}>
+        <h4 className={styles.filters__title}>Фильтры</h4>
+        <div className={styles.button__cross}>
+          <p className={styles.button__title}>Сбросить все</p>
+          <CloseButton aria-label="Close modal" className={styles.cross__item} />
         </div>
       </div>
       <Select
@@ -48,7 +48,7 @@ const Filters = () => {
         label="Оклад"
       />
       <NumberInput placeholder="до" step={100} min={0} size="md" mb={'20px'} />
-      <Button type="submit" className={style.button__submit}>
+      <Button type="submit" className={styles.button__submit}>
         Применить
       </Button>
     </form>

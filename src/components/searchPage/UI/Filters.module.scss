@@ -1,7 +1,8 @@
 @use '../../../styles' as *;
+
 .filters__container {
   font-family: 'Inter', sans-serif;
-  width: 19.7rem;
+  min-width: 19.7rem;
   height: 22.5rem;
   padding: 1.25rem;
   border-radius: 0.75rem;
