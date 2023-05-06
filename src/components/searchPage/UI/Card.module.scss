@@ -1,0 +1,89 @@
+@use '../../../styles' as *;
+
+.cards__box {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.card__box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 1.5rem;
+  background-color: $white;
+  border: 1px solid $grey200;
+  border-radius: 0.75rem;
+}
+
+.vacancy__item {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+}
+
+.vacancy__title {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+  color: $blue500;
+}
+
+.vacancy__terms {
+  display: flex;
+  margin-bottom: 0.75rem;
+}
+
+.vacancy__schedule {
+  margin-left: 2rem;
+  font-weight: 400;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    position: relative;
+    left: -1rem;
+    top: -0.2rem;
+    background-image: url('../../../assets/dot.png');
+    background-size: cover;
+    background-position: center;
+    width: 0.25rem;
+    height: 0.25rem;
+  }
+}
+
+.vacancy__location {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.location__image {
+  display: block;
+  background-image: url('../../../assets/location.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.location__name {
+  font-weight: 400;
+}
+
+.favorits__star {
+  &_empty,
+  &_filled {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  &_empty {
+    background-image: url('../../../assets/star_empty.png');
+  }
+
+  &_filled {
+    background-image: url('../../../assets/star_filled.png');
+  }
+}
