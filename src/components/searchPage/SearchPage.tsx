@@ -1,7 +1,12 @@
 import React from 'react';
+import Filters from './UI/Filters';
 
 const SearchPage = () => {
-  return <div>SearchPage</div>;
+  return (
+    <div>
+      <Filters />
+    </div>
+  );
 };
 
 export default SearchPage;

@@ -1,0 +1,70 @@
+@use '../../../styles' as *;
+.filters__container {
+  font-family: 'Inter', sans-serif;
+  width: 19.7rem;
+  height: 22.5rem;
+  padding: 1.25rem;
+  border-radius: 0.75rem;
+  border: 1px solid $grey200;
+  background-color: $white;
+}
+
+.filters__header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.filters__title {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.button__title {
+  display: block;
+  margin-right: 0.56rem;
+}
+
+.button__title,
+.cross {
+  font-size: 0.875rem;
+}
+
+.button__cross {
+  color: $grey500;
+  display: flex;
+  height: 1.25rem;
+  cursor: pointer;
+}
+
+.cross__item {
+  &:hover {
+    background-color: transparent;
+  }
+}
+
+.cross__item,
+.button__cross {
+  &:hover {
+    color: $blue500;
+  }
+
+  &:active {
+    color: $blue400;
+  }
+}
+
+.button__submit {
+  background-color: $blue500;
+  width: 100%;
+
+  &:hover {
+    background-color: $blue600;
+  }
+
+  &:disabled {
+    background-color: $blue400;
+  }
+}
