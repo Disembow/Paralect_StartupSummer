@@ -40,13 +40,8 @@
   cursor: pointer;
 }
 
-.cross__item {
-  &:hover {
-    background-color: transparent;
-  }
-}
-
 .cross__item,
+.button__title,
 .button__cross {
   &:hover {
     color: $blue500;

@@ -20,7 +20,7 @@ const Filters = () => {
         <h4 className={styles.filters__title}>Фильтры</h4>
         <div className={styles.button__cross}>
           <p className={styles.button__title}>Сбросить все</p>
-          <CloseButton aria-label="Close modal" className={styles.cross__item} />
+          <CloseButton aria-label="Cleare all filters" className={styles.cross__item} />
         </div>
       </div>
       <Select
