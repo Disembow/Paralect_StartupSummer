@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 interface IInitState {
-  id: string;
+  cardsId: string[];
 }
 
 const initialState: IInitState = {
-  id: '',
+  cardsId: [],
 };
 
 const cardsSlice = createSlice({
@@ -13,7 +13,7 @@ const cardsSlice = createSlice({
   initialState,
   reducers: {
     setCard(state, action) {
-      state.id = action.payload.id;
+      state.cardsId.push(action.payload);
     },
   },
 });
