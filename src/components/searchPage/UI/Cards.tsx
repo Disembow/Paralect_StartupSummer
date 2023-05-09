@@ -10,7 +10,11 @@ export type TData = {
   location: string;
 };
 
-const tempData: TData[] = [
+interface ICards {
+  data: TData[];
+}
+
+export const tempData: TData[] = [
   {
     id: 1,
     prof: 'Экономист',
@@ -41,10 +45,10 @@ const tempData: TData[] = [
   },
 ];
 
-const Cards = () => {
+const Cards = ({ data }: ICards) => {
   return (
     <div className={styles.cards__box}>
-      {tempData.map(({ id, prof, salary, schedule, location }) => (
+      {data.map(({ id, prof, salary, schedule, location }) => (
         <Card key={id} prof={prof} salary={salary} schedule={schedule} location={location} />
       ))}
     </div>

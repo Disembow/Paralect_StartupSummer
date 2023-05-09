@@ -4,7 +4,7 @@ import { TData } from './Cards';
 
 const Card = ({ prof, salary, schedule, location }: TData) => {
   return (
-    <div className={styles.card__box}>
+    <div className={styles.card__item}>
       <div className={styles.vacancy__item}>
         <h4 className={styles.vacancy__title}>{prof}</h4>
         <div className={styles.vacancy__terms}>

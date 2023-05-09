@@ -1,7 +1,14 @@
 import React from 'react';
+import Cards, { tempData } from '../searchPage/UI/Cards';
+import { useAppSelector } from '../../app/hooks';
+import EmptyLayout from './UI/EmptyLayout';
+import styles from './FavoritesPage.module.scss';
 
 const FavoritesPage = () => {
-  return <div>FavoritesPage</div>;
+  const numberOfCards = useAppSelector((state) => state.cards.cardsId.length);
+  console.log(numberOfCards);
+
+  return <>{numberOfCards > 0 ? <Cards data={tempData} /> : <EmptyLayout />}</>;
 };
 
 export default FavoritesPage;
