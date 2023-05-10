@@ -1,16 +1,30 @@
 import React from 'react';
 import styles from './Card.module.scss';
-import { TData } from './Cards';
 
-const Card = ({ prof, salary, schedule, location }: TData) => {
+export type TCard = {
+  id?: number;
+  prof: string;
+  salary_from: number;
+  salary_to: number;
+  schedule: string;
+  location: string;
+  currency: string;
+};
+
+const Card = ({ prof, location, salary_from, salary_to, schedule, currency }: TCard) => {
+  const salary =
+    salary_from === 0
+      ? 'По результатам собеседования'
+      : salary_to === 0
+      ? `зп от ${salary_from} ${currency.toUpperCase()}`
+      : `зп от ${salary_from} - ${salary_to} ${currency.toUpperCase()}`;
+
   return (
     <div className={styles.card__item}>
       <div className={styles.vacancy__item}>
         <h4 className={styles.vacancy__title}>{prof}</h4>
         <div className={styles.vacancy__terms}>
-          <span>зп от&nbsp;</span>
           <span>{salary}</span>
-          <span>&nbsp;rub</span>
           <span className={styles.vacancy__schedule}>{schedule}</span>
         </div>
         <div className={styles.vacancy__location}>
@@ -18,7 +32,7 @@ const Card = ({ prof, salary, schedule, location }: TData) => {
           <span className={styles.location__name}>{location}</span>
         </div>
       </div>
-      <div className={styles.favorits__star_filled} /> {/* Add tern operator with condition */}
+      <div className={styles.favorits__star_filled} />
     </div>
   );
 };

@@ -1,56 +1,28 @@
 import React from 'react';
 import Card from './Card';
 import styles from './Card.module.scss';
-
-export type TData = {
-  id?: number;
-  prof: string;
-  salary: string | number;
-  schedule: string;
-  location: string;
-};
+import { TJobsDate } from '../../../types/dataType';
 
 interface ICards {
-  data: TData[];
+  data: TJobsDate[];
 }
-
-export const tempData: TData[] = [
-  {
-    id: 1,
-    prof: 'Экономист',
-    salary: '70000',
-    schedule: 'полный рабочий день',
-    location: 'Белосток',
-  },
-  {
-    id: 2,
-    prof: 'Бухгалтер',
-    salary: '60000',
-    schedule: 'частичная занятость',
-    location: 'Гродно',
-  },
-  {
-    id: 3,
-    prof: 'Начальник',
-    salary: '170000',
-    schedule: 'полный рабочий день',
-    location: 'Минск',
-  },
-  {
-    id: 4,
-    prof: 'Экономист',
-    salary: '70000',
-    schedule: 'полный рабочий день',
-    location: 'Брест',
-  },
-];
 
 const Cards = ({ data }: ICards) => {
   return (
     <div className={styles.cards__box}>
-      {data.map(({ id, prof, salary, schedule, location }) => (
-        <Card key={id} prof={prof} salary={salary} schedule={schedule} location={location} />
-      ))}
+      {data
+        .flat()
+        .map(({ id, profession, town, payment_from, payment_to, type_of_work, currency }) => (
+          <Card
+            schedule={type_of_work.title}
+            salary_from={payment_from}
+            salary_to={payment_to}
+            key={id}
+            prof={profession}
+            location={town.title}
+            currency={currency}
+          />
+        ))}
     </div>
   );
 };
