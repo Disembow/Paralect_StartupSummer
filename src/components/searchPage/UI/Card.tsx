@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
+import { setFavourits, getFavourits } from '../../../app/localStorage';
 import styles from './Card.module.scss';
 
 export type TCard = {
@@ -23,7 +24,7 @@ const Card: FC<TCard> = ({ id, prof, location, salary_from, salary_to, schedule,
       salary_to,
       schedule,
       location,
-      currency,
+      currency: currency.toUpperCase(),
     });
   }, [currency, id, location, prof, salary_from, salary_to, schedule]);
 
@@ -31,30 +32,20 @@ const Card: FC<TCard> = ({ id, prof, location, salary_from, salary_to, schedule,
     salary_from === 0
       ? 'По результатам собеседования'
       : salary_to === 0
-      ? `зп от ${salary_from} ${currency.toUpperCase()}`
-      : `зп от ${salary_from} - ${salary_to} ${currency.toUpperCase()}`;
-
-  const setFavourits = (array: TCard[]): void => {
-    localStorage.setItem('favorit_jobs', JSON.stringify(array));
-  };
-
-  const getFavourits = (): TCard[] => {
-    const LS = localStorage.getItem('favorit_jobs');
-    if (LS) return JSON.parse(LS);
-    return [];
-  };
+      ? `зп от ${salary_from} ${currency}`
+      : `зп от ${salary_from} - ${salary_to} ${currency}`;
 
   const addToFavourits = () => {
     setIsFavourite(!isFavourite);
 
-    const currStorage = localStorage.getItem('favorit_jobs');
+    const currStorage = getFavourits();
 
     if (!isFavourite && !currStorage) {
       setFavourits([card!]);
     } else if (!isFavourite && currStorage) {
-      setFavourits([card!, ...getFavourits()]);
+      setFavourits([card!, ...currStorage]);
     } else if (currStorage) {
-      setFavourits(getFavourits().filter((e) => e.id !== card?.id));
+      setFavourits(currStorage.filter((e) => e.id !== card?.id));
     }
   };
 
