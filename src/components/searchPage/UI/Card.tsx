@@ -27,6 +27,9 @@ const Card: FC<TJobsDate> = ({
       type_of_work,
       currency: currency.toUpperCase(),
     });
+
+    const isInFavoorits = getFavourits().filter((e) => e.id === id).length;
+    setIsFavourite(isInFavoorits === 1);
   }, [currency, id, firm_name, profession, town, payment_from, payment_to, type_of_work]);
 
   const salary =
