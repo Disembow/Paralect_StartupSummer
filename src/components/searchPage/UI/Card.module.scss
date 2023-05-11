@@ -13,12 +13,17 @@
   justify-content: space-between;
   width: 48.3rem;
   max-width: 48.3rem;
-  height: 8.56rem;
+  width: 100%;
+  min-height: 8.56rem;
   padding: 1.5rem;
   background-color: $white;
   border: 1px solid $grey200;
   border-radius: 0.75rem;
   line-height: 125%;
+
+  @media (max-width: 991px) {
+    max-width: none;
+  }
 }
 
 .vacancy__item {
@@ -36,11 +41,19 @@
 .vacancy__terms {
   display: flex;
   margin-bottom: 0.75rem;
+
+  @media (max-width: 991px) {
+    flex-direction: column;
+  }
 }
 
 .vacancy__schedule {
   margin-left: 1.5rem;
   font-weight: 400;
+
+  @media (max-width: 991px) {
+    margin: 0;
+  }
 
   &::before {
     content: '';
@@ -53,6 +66,10 @@
     background-position: center;
     width: 0.25rem;
     height: 0.25rem;
+
+    @media (max-width: 991px) {
+      content: none;
+    }
   }
 }
 
@@ -80,7 +97,7 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    width: 1.25rem;
+    min-width: 1.25rem;
     height: 1.25rem;
     cursor: pointer;
   }

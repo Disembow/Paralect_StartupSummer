@@ -7,7 +7,7 @@ const SearchBar = () => {
   return (
     <>
       <Input
-        width={'100%'}
+        min-width={'100%'}
         icon={<IconSearch size="1.2rem" />}
         placeholder="Введите название вакансии"
         styles={{
