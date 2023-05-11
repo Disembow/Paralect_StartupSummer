@@ -13,10 +13,12 @@
   justify-content: space-between;
   width: 48.3rem;
   max-width: 48.3rem;
+  height: 8.56rem;
   padding: 1.5rem;
   background-color: $white;
   border: 1px solid $grey200;
   border-radius: 0.75rem;
+  line-height: 125%;
 }
 
 .vacancy__item {
@@ -26,8 +28,8 @@
 
 .vacancy__title {
   font-size: 1.25rem;
-  margin-bottom: 0.75rem;
   font-weight: 600;
+  margin-bottom: 0.75rem;
   color: $blue500;
 }
 
@@ -37,14 +39,14 @@
 }
 
 .vacancy__schedule {
-  margin-left: 2rem;
+  margin-left: 1.5rem;
   font-weight: 400;
 
   &::before {
     content: '';
     display: inline-block;
     position: relative;
-    left: -1rem;
+    left: -0.75rem;
     top: -0.2rem;
     background-image: url('../../../assets/dot.png');
     background-size: cover;

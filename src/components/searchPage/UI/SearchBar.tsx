@@ -8,12 +8,24 @@ const SearchBar = () => {
     <>
       <Input
         width={'100%'}
-        icon={<IconSearch size="0.8rem" />}
+        icon={<IconSearch size="1.2rem" />}
         placeholder="Введите название вакансии"
+        styles={{
+          input: {
+            '::placeholder': {
+              fontSize: '0.875rem',
+              fontFamily: 'Inter',
+              fontWeight: 400,
+              position: 'relative',
+              left: '-1rem',
+            },
+          },
+        }}
         ff={'Inter'}
-        fw={600}
+        fw={400}
         fz={'0.875rem'}
         mb={'1rem'}
+        iconWidth={'2.25rem'}
         rightSection={
           <Button
             type="button"
