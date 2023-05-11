@@ -80,13 +80,17 @@
     background-size: cover;
     width: 1.25rem;
     height: 1.25rem;
+    cursor: pointer;
   }
 
   &_empty {
-    background-image: url('../../../assets/star_empty.png');
+    background-image: url('../../../assets/States=Default.png');
+    &:hover {
+      background-image: url('../../../assets/States=Hover.png');
+    }
   }
 
   &_filled {
-    background-image: url('../../../assets/star_filled.png');
+    background-image: url('../../../assets/States=Pressed.png');
   }
 }

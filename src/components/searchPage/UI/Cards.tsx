@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import Card from './Card';
 import styles from './Card.module.scss';
 import { TJobsDate } from '../../../types/dataType';
@@ -7,7 +7,7 @@ interface ICards {
   data: TJobsDate[];
 }
 
-const Cards = ({ data }: ICards) => {
+const Cards: FC<ICards> = ({ data }) => {
   return (
     <div className={styles.cards__box}>
       {data
@@ -18,6 +18,7 @@ const Cards = ({ data }: ICards) => {
             salary_from={payment_from}
             salary_to={payment_to}
             key={id}
+            id={id}
             prof={profession}
             location={town.title}
             currency={currency}
