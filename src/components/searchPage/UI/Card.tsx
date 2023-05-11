@@ -1,39 +1,40 @@
 import React, { FC, useEffect, useState } from 'react';
 import { setFavourits, getFavourits } from '../../../app/localStorage';
+import { TJobsDate } from '../../../types/dataType';
 import styles from './Card.module.scss';
 
-export type TCard = {
-  id: number;
-  prof: string;
-  salary_from: number;
-  salary_to: number;
-  schedule: string;
-  location: string;
-  currency: string;
-};
-
-const Card: FC<TCard> = ({ id, prof, location, salary_from, salary_to, schedule, currency }) => {
+const Card: FC<TJobsDate> = ({
+  id,
+  profession,
+  firm_name,
+  town,
+  payment_from,
+  payment_to,
+  type_of_work,
+  currency,
+}) => {
   const [isFavourite, setIsFavourite] = useState<boolean>(false);
-  const [card, setCard] = useState<TCard | null>(null);
+  const [card, setCard] = useState<TJobsDate | null>(null);
 
   useEffect(() => {
     setCard({
       id,
-      prof,
-      salary_from,
-      salary_to,
-      schedule,
-      location,
+      profession,
+      firm_name,
+      town,
+      payment_from,
+      payment_to,
+      type_of_work,
       currency: currency.toUpperCase(),
     });
-  }, [currency, id, location, prof, salary_from, salary_to, schedule]);
+  }, [currency, id, firm_name, profession, town, payment_from, payment_to, type_of_work]);
 
   const salary =
-    salary_from === 0
+    payment_from === 0
       ? 'По результатам собеседования'
-      : salary_to === 0
-      ? `зп от ${salary_from} ${currency}`
-      : `зп от ${salary_from} - ${salary_to} ${currency}`;
+      : payment_to === 0
+      ? `зп от ${payment_from} ${currency}`
+      : `зп от ${payment_from} - ${payment_to} ${currency}`;
 
   const addToFavourits = () => {
     setIsFavourite(!isFavourite);
@@ -52,14 +53,14 @@ const Card: FC<TCard> = ({ id, prof, location, salary_from, salary_to, schedule,
   return (
     <div className={styles.card__item}>
       <div className={styles.vacancy__item}>
-        <h4 className={styles.vacancy__title}>{prof}</h4>
+        <h4 className={styles.vacancy__title}>{profession}</h4>
         <div className={styles.vacancy__terms}>
           <span>{salary}</span>
-          <span className={styles.vacancy__schedule}>{schedule}</span>
+          <span className={styles.vacancy__schedule}>{type_of_work.title}</span>
         </div>
         <div className={styles.vacancy__location}>
           <span className={styles.location__image} />
-          <span className={styles.location__name}>{location}</span>
+          <span className={styles.location__name}>{town.title}</span>
         </div>
       </div>
       <div

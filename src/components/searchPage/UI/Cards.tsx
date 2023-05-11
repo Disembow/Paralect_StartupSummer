@@ -12,18 +12,30 @@ const Cards: FC<ICards> = ({ data }) => {
     <div className={styles.cards__box}>
       {data
         .flat()
-        .map(({ id, profession, town, payment_from, payment_to, type_of_work, currency }) => (
-          <Card
-            schedule={type_of_work.title}
-            salary_from={payment_from}
-            salary_to={payment_to}
-            key={id}
-            id={id}
-            prof={profession}
-            location={town.title}
-            currency={currency}
-          />
-        ))}
+        .map(
+          ({
+            id,
+            profession,
+            town,
+            firm_name,
+            payment_from,
+            payment_to,
+            type_of_work,
+            currency,
+          }) => (
+            <Card
+              type_of_work={type_of_work}
+              firm_name={firm_name}
+              payment_from={payment_from}
+              payment_to={payment_to}
+              key={id}
+              id={id}
+              profession={profession}
+              town={town}
+              currency={currency}
+            />
+          )
+        )}
     </div>
   );
 };
