@@ -5,21 +5,23 @@ interface IInitState {
   jobsData: TJobsDate[];
   isLoading: boolean;
   error: string;
+  isBurgerOpen: boolean;
 }
 
 const initialState: IInitState = {
   jobsData: [],
   isLoading: false,
   error: '',
+  isBurgerOpen: false,
 };
 
 const cardsSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    // setCard(state, action) {
-    //   state.jobsData.push(action.payload);
-    // },
+    setIsBurgerOpen(state) {
+      state.isBurgerOpen = !state.isBurgerOpen;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -76,6 +78,6 @@ export const fetchJobs = createAsyncThunk<TData, [string, number, number]>(
   }
 );
 
-// export const { setCard } = cardsSlice.actions;
+export const { setIsBurgerOpen } = cardsSlice.actions;
 
 export default cardsSlice.reducer;
