@@ -16,7 +16,6 @@ const BurgerMenu = () => {
 
   return (
     <>
-      <div className={isBurgerOpen ? 'overlay' : ''} onClick={toggle} />
       <Burger
         className="burger__button"
         pos={'absolute'}

@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import './Navigation.scss';
 
 type TNav = {
-  callback: () => void;
+  callback?: () => void;
 };
 
 const Navigation: FC<TNav> = ({ callback }) => {

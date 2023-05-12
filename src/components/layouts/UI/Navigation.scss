@@ -51,26 +51,37 @@
   border: 1px solid $grey500;
   border-radius: 0.5rem;
   z-index: 1;
-  transform: translateX(120%);
+  transform: translateY(-120%);
   transition: 0.5s;
 }
 
 .burger__button {
   z-index: 2;
+  display: none;
+
+  @media (max-width: 991px) {
+    display: block;
+  }
 }
 
 .open {
-  transform: translateX(0%);
+  transform: translateY(0%);
   transition: 0.5s;
 }
 
 .overlay {
-  position: fixed;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1;
-  cursor: pointer;
+  &_visible {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    cursor: pointer;
+  }
+
+  &_invisible {
+    display: none;
+  }
 }
