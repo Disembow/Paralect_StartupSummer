@@ -1,15 +1,22 @@
-import React, { Suspense, lazy } from 'react';
+import React, { useEffect, useState } from 'react';
 import Filters from './UI/Filters';
 import SearchBar from './UI/SearchBar';
 import styles from './SearchPage.module.scss';
-import { useAppSelector } from '../../app/hooks';
-import { Loader } from '@mantine/core';
-import Pagination from './UI/Pagination';
-
-const Cards = lazy(() => import('./UI/Cards'));
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { Center, Loader, Pagination } from '@mantine/core';
+import { LAST_PAGE, fetchJobs } from '../../app/slices/cardsSlice';
+import Cards from './UI/Cards';
 
 const SearchPage = () => {
   const jobsData = useAppSelector((state) => state.cards.jobsData);
+  const isLoading = useAppSelector((state) => state.cards.isLoading);
+  const dispatch = useAppDispatch();
+
+  const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    dispatch(fetchJobs(['', page]));
+  }, [page, dispatch]);
 
   return (
     <>
@@ -17,10 +24,27 @@ const SearchPage = () => {
         <Filters />
         <div className={styles.search}>
           <SearchBar />
-          <Pagination />
-          <Suspense fallback={<Loader size={64} />}>
+          {isLoading ? (
+            <Center>
+              <Loader size={64} />
+            </Center>
+          ) : (
             <Cards data={jobsData} />
-          </Suspense>
+          )}
+          <Pagination
+            m={'2.5rem 0 2.75rem 0'}
+            styles={{
+              control: {
+                borderRadius: '0.5rem',
+                '&[data-active]': {
+                  backgroundColor: '#5e96fc',
+                },
+              },
+            }}
+            position="center"
+            total={LAST_PAGE}
+            onChange={setPage}
+          />
         </div>
       </div>
     </>
