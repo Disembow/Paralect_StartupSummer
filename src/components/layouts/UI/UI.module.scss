@@ -39,23 +39,3 @@
   margin: auto 0;
   letter-spacing: -0.02rem;
 }
-
-.navigation {
-  display: flex;
-  gap: 3.75rem;
-  &__item {
-    text-decoration: none;
-
-    &:visited:not(.active) {
-      color: $black;
-    }
-
-    &:active {
-      color: $blue600 !important;
-    }
-  }
-}
-
-.active {
-  color: $blue500;
-}

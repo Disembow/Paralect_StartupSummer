@@ -20,7 +20,7 @@ const Filters = () => {
   };
 
   const CustonIconSelector = () => {
-    return <IconSelector stroke-width="1.25" color="#ACADB9" />;
+    return <IconSelector strokeWidth="1.25" color="#ACADB9" />;
   };
 
   return (

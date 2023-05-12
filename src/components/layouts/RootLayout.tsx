@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Logo from './UI/Logo';
-import Navigation from './UI/Navigation';
+import NavigationBar from './UI/NavigationBar';
 import './RootLayout.scss';
 
 export default function RootLayout() {
@@ -10,7 +10,7 @@ export default function RootLayout() {
       <header className="header">
         <div className="header__wrapper">
           <Logo />
-          <Navigation />
+          <NavigationBar />
           <span className="empty"></span>
         </div>
       </header>

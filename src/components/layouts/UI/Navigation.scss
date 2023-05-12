@@ -1,0 +1,40 @@
+@use '../../../styles' as *;
+
+.navigation {
+  display: flex;
+  gap: 3.75rem;
+
+  &__row {
+    display: flex;
+
+    @media (max-width: 991px) {
+      display: none;
+    }
+  }
+
+  &__burger {
+    display: none;
+
+    @media (max-width: 991px) {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+  }
+
+  &__item {
+    text-decoration: none;
+
+    &:visited:not(.active) {
+      color: $black;
+    }
+
+    &:active {
+      color: $blue600 !important;
+    }
+  }
+}
+
+.active {
+  color: $blue500;
+}
