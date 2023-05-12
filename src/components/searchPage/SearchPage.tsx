@@ -1,19 +1,15 @@
-import React, { Suspense, lazy, useEffect } from 'react';
+import React, { Suspense, lazy } from 'react';
 import Filters from './UI/Filters';
 import SearchBar from './UI/SearchBar';
 import styles from './SearchPage.module.scss';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { fetchJobs } from '../../app/slices/cardsSlice';
+import { useAppSelector } from '../../app/hooks';
 import { Loader } from '@mantine/core';
+import Pagination from './UI/Pagination';
+
 const Cards = lazy(() => import('./UI/Cards'));
 
 const SearchPage = () => {
-  const dispatch = useAppDispatch();
   const jobsData = useAppSelector((state) => state.cards.jobsData);
-
-  useEffect(() => {
-    dispatch(fetchJobs(['', 1, 10]));
-  }, [dispatch]);
 
   return (
     <>
@@ -21,6 +17,7 @@ const SearchPage = () => {
         <Filters />
         <div className={styles.search}>
           <SearchBar />
+          <Pagination />
           <Suspense fallback={<Loader size={64} />}>
             <Cards data={jobsData} />
           </Suspense>

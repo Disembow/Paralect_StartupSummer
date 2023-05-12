@@ -6,6 +6,7 @@ interface IInitState {
   isLoading: boolean;
   error: string;
   isBurgerOpen: boolean;
+  jobsCount: number;
 }
 
 const initialState: IInitState = {
@@ -13,6 +14,7 @@ const initialState: IInitState = {
   isLoading: false,
   error: '',
   isBurgerOpen: false,
+  jobsCount: 0,
 };
 
 const cardsSlice = createSlice({
@@ -27,11 +29,12 @@ const cardsSlice = createSlice({
     builder
       .addCase(fetchJobs.pending, (state) => {
         state.isLoading = true;
+        state.jobsData.length = 0;
       })
       .addCase(fetchJobs.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = '';
-        state.jobsData.length = 0;
+        state.jobsCount = action.payload.total;
         state.jobsData.push(action.payload.objects);
       })
       .addCase(fetchJobs.rejected, (state) => {
@@ -43,17 +46,19 @@ const cardsSlice = createSlice({
 
 const API_LINK = 'https://startup-summer-2023-proxy.onrender.com/2.0/';
 const API_VACANCIES = 'vacancies/';
-const JOBS_PER_PAGE = 10;
+export const JOBS_PER_PAGE = 10;
+export const JOBS_COUNT = 500;
+export const LAST_PAGE = Math.ceil(JOBS_COUNT / JOBS_PER_PAGE);
 
 const CLIENT_SECRET =
   'v3.r.137440105.ffdbab114f92b821eac4e21f485343924a773131.06c3bdbb8446aeb91c35b80c42ff69eb9c457948'; //! remove into .env.local or .env.client
 
-export const fetchJobs = createAsyncThunk<TData, [string, number, number]>(
+export const fetchJobs = createAsyncThunk<TData, [string, number]>(
   'auth/fetchJobs',
-  async ([search, page = 1, jobsPerPage = JOBS_PER_PAGE], { rejectWithValue }) => {
+  async ([search, page = 1], { rejectWithValue }) => {
     if (!search || search === '') {
       const response = await fetch(
-        `${API_LINK}${API_VACANCIES}?page=${page}&count=${jobsPerPage}`,
+        `${API_LINK}${API_VACANCIES}?page=${page}&count=${JOBS_PER_PAGE}`,
         {
           method: 'GET',
           headers: {
@@ -70,6 +75,7 @@ export const fetchJobs = createAsyncThunk<TData, [string, number, number]>(
         return rejectWithValue('Невозможно получить данные с этого ресурса');
       }
 
+      console.log(page);
       const data: TData = await response.json();
       return data;
     } else {
