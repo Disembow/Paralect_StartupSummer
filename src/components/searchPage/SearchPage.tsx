@@ -36,6 +36,7 @@ const SearchPage = () => {
             styles={{
               control: {
                 borderRadius: '0.5rem',
+                color: '#232134',
                 '&[data-active]': {
                   backgroundColor: '#5e96fc',
                 },
