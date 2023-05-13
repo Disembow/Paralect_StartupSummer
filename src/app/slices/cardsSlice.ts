@@ -75,7 +75,6 @@ export const fetchJobs = createAsyncThunk<TData, [string, number]>(
         return rejectWithValue('Невозможно получить данные с этого ресурса');
       }
 
-      console.log(page);
       const data: TData = await response.json();
       return data;
     } else {

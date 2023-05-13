@@ -3,7 +3,6 @@ import Cards from '../searchPage/UI/Cards';
 import EmptyLayout from './UI/EmptyLayout';
 import { getFavourits } from '../../app/localStorage';
 import StyledPagination from '../searchPage/UI/StyledPagination';
-import styles from './FavoritesPage.module.scss';
 
 const FavoritesPage = () => {
   const [page, setPage] = useState(1);
@@ -16,8 +15,6 @@ const FavoritesPage = () => {
 
   const start = (page - 1) * ITEMS_ON_FAVORITE_PAGE;
   const end = start + ITEMS_ON_FAVORITE_PAGE;
-
-  console.log(start, end);
 
   return (
     <>
