@@ -3,9 +3,10 @@ import Filters from './UI/Filters';
 import SearchBar from './UI/SearchBar';
 import styles from './SearchPage.module.scss';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { Center, Loader, Pagination } from '@mantine/core';
+import { Center, Loader /*, Pagination*/ } from '@mantine/core';
 import { LAST_PAGE, fetchJobs } from '../../app/slices/cardsSlice';
 import Cards from './UI/Cards';
+import StyledPagination from './UI/StyledPagination';
 
 const SearchPage = () => {
   const jobsData = useAppSelector((state) => state.cards.jobsData);
@@ -31,21 +32,7 @@ const SearchPage = () => {
           ) : (
             <Cards data={jobsData} />
           )}
-          <Pagination
-            m={'2.5rem 0 2.75rem 0'}
-            styles={{
-              control: {
-                borderRadius: '0.5rem',
-                color: '#232134',
-                '&[data-active]': {
-                  backgroundColor: '#5e96fc',
-                },
-              },
-            }}
-            position="center"
-            total={LAST_PAGE}
-            onChange={setPage}
-          />
+          <StyledPagination total={LAST_PAGE} onChange={setPage} margin="2.5rem 0 2.75rem 0" />
         </div>
       </div>
     </>
