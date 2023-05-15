@@ -8,6 +8,7 @@ interface ICards {
 }
 
 const Cards: FC<ICards> = ({ data }) => {
+  console.log(data);
   return (
     <div className={styles.cards__box}>
       {data

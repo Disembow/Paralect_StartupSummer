@@ -3,8 +3,6 @@ import { setFavourits, getFavourits } from '../../../app/localStorage';
 import { TJobsDate } from '../../../types/dataType';
 import { useNavigate } from 'react-router';
 import styles from './Card.module.scss';
-import { fetchJobs, getURLString } from '../../../app/slices/cardsSlice';
-import { useAppDispatch } from '../../../app/hooks';
 
 const Card: FC<TJobsDate> = ({
   id,
@@ -17,14 +15,6 @@ const Card: FC<TJobsDate> = ({
   currency,
 }) => {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-
-  const goToVacancyPage = (id: number) => {
-    // dispatch(fetchJobs(getURLString('id', id)));
-
-    navigate(`${id}`);
-  };
-
   const [isFavourite, setIsFavourite] = useState<boolean>(false);
   const [card, setCard] = useState<TJobsDate | null>(null);
 
@@ -68,7 +58,7 @@ const Card: FC<TJobsDate> = ({
   };
 
   return (
-    <div className={styles.card__item} onClick={() => goToVacancyPage(id)}>
+    <div className={styles.card__item} onClick={() => navigate(`${id}`)}>
       <div className={styles.vacancy__item}>
         <h4 className={styles.vacancy__title}>{profession}</h4>
         <div className={styles.vacancy__terms}>

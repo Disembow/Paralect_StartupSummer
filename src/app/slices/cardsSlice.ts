@@ -68,7 +68,7 @@ const headers = {
 export const getURLString = (type: 'id' | 'page' | '', payload: number): string => {
   switch (type) {
     case 'id':
-      return `${API_LINK}${API_VACANCIES}/${payload}`;
+      return `${API_LINK}${API_VACANCIES}${payload}`;
     case 'page':
       return `${API_LINK}${API_VACANCIES}?page=${payload}&count=${JOBS_PER_PAGE}`;
   }
