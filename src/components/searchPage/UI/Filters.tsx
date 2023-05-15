@@ -1,29 +1,21 @@
-import React, { useState } from 'react';
+import React, { FC } from 'react';
 import styles from './Filters.module.scss';
 import { Select, CloseButton, NumberInput, Button } from '@mantine/core';
 import { IconChevronDown, IconSelector } from '@tabler/icons-react';
-import { useAppSelector } from '../../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { setSearchValue } from '../../../app/slices/cardsSlice';
 
-type TFilters = {
-  select: string;
-  salaryFrom: number;
-  salaryTo: number;
-};
+interface IFilter {
+  submitHandler: (e: React.FormEvent<HTMLFormElement>) => void;
+}
 
-const initialValue: TFilters = {
-  select: '',
-  salaryFrom: 0,
-  salaryTo: 0,
-};
-
-const Filters = () => {
-  const [value, setValue] = useState<TFilters>(initialValue);
-
+const Filters: FC<IFilter> = ({ submitHandler }) => {
+  const dispatch = useAppDispatch();
+  const searchParams = useAppSelector((state) => state.cards.searchParams);
   const industries = useAppSelector((state) => state.industries.industries).map((e) => {
     return {
-      value: e.title_rus,
+      value: e.key.toString(),
       label: e.title_rus,
-      key: e.key,
     };
   });
 
@@ -42,16 +34,16 @@ const Filters = () => {
     lineHeight: '150%',
   };
 
-  const CustonIconSelector = () => {
+  const CustomIconSelector = () => {
     return <IconSelector strokeWidth="1.25" color="#ACADB9" />;
   };
 
   return (
     <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        console.log(value);
-      }}
+      // onSubmit={(e) => {
+      //   e.preventDefault();
+      // }}
+      onSubmit={(e) => submitHandler(e)}
       className={styles.filters__container}
     >
       <div className={styles.filters__header}>
@@ -67,10 +59,12 @@ const Filters = () => {
       </div>
       <Select
         onChange={(e) =>
-          setValue({
-            ...value,
-            ...{ select: e ? e : '' },
-          })
+          dispatch(
+            setSearchValue({
+              ...searchParams,
+              ...{ select: e },
+            })
+          )
         }
         label="Отрасль"
         labelProps={labelProps}
@@ -107,7 +101,7 @@ const Filters = () => {
         mb={'8px'}
         label="Оклад"
         radius={8}
-        rightSection={<CustonIconSelector />}
+        rightSection={<CustomIconSelector />}
         styles={{
           rightSection: { pointerEvents: 'none' },
           input: {
@@ -115,10 +109,12 @@ const Filters = () => {
           },
         }}
         onChange={(e) =>
-          setValue({
-            ...value,
-            ...{ salaryFrom: e === '' ? 0 : e },
-          })
+          dispatch(
+            setSearchValue({
+              ...searchParams,
+              ...{ salaryFrom: e },
+            })
+          )
         }
       />
       <NumberInput
@@ -128,7 +124,7 @@ const Filters = () => {
         size="md"
         mb={'18px'}
         radius={8}
-        rightSection={<CustonIconSelector />}
+        rightSection={<CustomIconSelector />}
         styles={{
           rightSection: { pointerEvents: 'none' },
           input: {
@@ -136,10 +132,12 @@ const Filters = () => {
           },
         }}
         onChange={(e) =>
-          setValue({
-            ...value,
-            ...{ salaryTo: e === '' ? 0 : e },
-          })
+          dispatch(
+            setSearchValue({
+              ...searchParams,
+              ...{ salaryTo: e },
+            })
+          )
         }
       />
       <Button type="submit" className={styles.button__submit}>

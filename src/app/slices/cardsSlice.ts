@@ -1,12 +1,20 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TData, TJobsDate } from '../../types/dataType';
 
+export interface TFilters {
+  select: number;
+  salaryFrom: number;
+  salaryTo: number;
+  page: number;
+}
+
 interface IInitState {
   jobsData: TJobsDate[];
   isLoading: boolean;
   error: string;
   isBurgerOpen: boolean;
   jobsCount: number;
+  searchParams: TFilters;
 }
 
 const initialState: IInitState = {
@@ -15,6 +23,12 @@ const initialState: IInitState = {
   error: '',
   isBurgerOpen: false,
   jobsCount: 0,
+  searchParams: {
+    select: 0,
+    salaryFrom: 0,
+    salaryTo: 0,
+    page: 1,
+  },
 };
 
 const cardsSlice = createSlice({
@@ -23,6 +37,9 @@ const cardsSlice = createSlice({
   reducers: {
     setIsBurgerOpen(state) {
       state.isBurgerOpen = !state.isBurgerOpen;
+    },
+    setSearchValue(state, action) {
+      state.searchParams = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -67,8 +84,8 @@ export const headers = {
 };
 
 export const getURLString = (
-  type: 'id' | 'page' | 'industries' | '',
-  payload?: number | string
+  type: 'id' | 'page' | 'industries' | 'filter' | '',
+  payload?: number | string | TFilters
 ): string => {
   switch (type) {
     case 'id':
@@ -77,6 +94,9 @@ export const getURLString = (
       return `${API_LINK}${API_VACANCIES}?page=${payload}&count=${JOBS_PER_PAGE}`;
     case 'industries':
       return `${API_LINK}${API_INDUSTRIES}`;
+    case 'filter':
+      const { salaryFrom, salaryTo, select, page } = payload as TFilters;
+      return `${API_LINK}${API_VACANCIES}?page=${page}&count=${JOBS_PER_PAGE}&published=1&payment_from=${salaryFrom}&payment_to=${salaryTo}&catalogues=${select}&no_agreement=1`;
     default:
       return '';
   }
@@ -103,6 +123,6 @@ export const fetchJobs = createAsyncThunk<TData, [string, string]>(
   }
 );
 
-export const { setIsBurgerOpen } = cardsSlice.actions;
+export const { setIsBurgerOpen, setSearchValue } = cardsSlice.actions;
 
 export default cardsSlice.reducer;
