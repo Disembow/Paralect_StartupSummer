@@ -1,7 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import { setFavourits, getFavourits } from '../../../app/localStorage';
 import { TJobsDate } from '../../../types/dataType';
-import { useNavigate } from 'react-router';
 import styles from './Card.module.scss';
 
 const Card: FC<TJobsDate> = ({
@@ -13,8 +12,8 @@ const Card: FC<TJobsDate> = ({
   payment_to,
   type_of_work,
   currency,
+  vacancyRichText,
 }) => {
-  const navigate = useNavigate();
   const [isFavourite, setIsFavourite] = useState<boolean>(false);
   const [card, setCard] = useState<TJobsDate | null>(null);
 
@@ -28,11 +27,22 @@ const Card: FC<TJobsDate> = ({
       payment_to,
       type_of_work,
       currency: currency.toUpperCase(),
+      vacancyRichText,
     });
 
     const isInFavoorits = getFavourits().filter((e) => e.id === id).length;
     setIsFavourite(isInFavoorits === 1);
-  }, [currency, id, firm_name, profession, town, payment_from, payment_to, type_of_work]);
+  }, [
+    currency,
+    id,
+    firm_name,
+    profession,
+    town,
+    payment_from,
+    payment_to,
+    type_of_work,
+    vacancyRichText,
+  ]);
 
   const salary =
     payment_from === 0
@@ -41,7 +51,8 @@ const Card: FC<TJobsDate> = ({
       ? `зп от ${payment_from} ${currency}`
       : `зп от ${payment_from} - ${payment_to} ${currency}`;
 
-  const addToFavourits = () => {
+  const addToFavourits = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.stopPropagation();
     setIsFavourite(!isFavourite);
 
     const currStorage = getFavourits();
@@ -58,7 +69,7 @@ const Card: FC<TJobsDate> = ({
   };
 
   return (
-    <div className={styles.card__item} onClick={() => navigate(`${id}`)}>
+    <div className={styles.card__item}>
       <div className={styles.vacancy__item}>
         <h4 className={styles.vacancy__title}>{profession}</h4>
         <div className={styles.vacancy__terms}>
@@ -72,7 +83,7 @@ const Card: FC<TJobsDate> = ({
       </div>
       <div
         className={isFavourite ? styles.favorits__star_filled : styles.favorits__star_empty}
-        onClick={addToFavourits}
+        onClick={(e) => addToFavourits(e)}
       />
     </div>
   );

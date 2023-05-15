@@ -9,3 +9,9 @@ export const getFavourits = (): TJobsDate[] => {
   if (LS) return JSON.parse(LS);
   return [];
 };
+
+export const getOneFavorite = (id: number): TJobsDate[] => {
+  return getFavourits().filter((e) => e.id === id);
+};
+
+// console.log(getOneFavorite(34797524));

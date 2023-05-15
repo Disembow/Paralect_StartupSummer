@@ -6,9 +6,9 @@ import parse from 'html-react-parser';
 type Description = Pick<TJobsDate, 'vacancyRichText'>;
 
 const Transcription: FC<Description> = ({ vacancyRichText }) => {
-  if (vacancyRichText) console.log(vacancyRichText);
+  const trimed = vacancyRichText!.replaceAll('<p><br /></p>', '');
 
-  return <div className={styles.transcription}>{parse(vacancyRichText!)}</div>;
+  return <div className={styles.transcription}>{parse(trimed)}</div>;
 };
 
 export default Transcription;

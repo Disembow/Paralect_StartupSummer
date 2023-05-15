@@ -7,6 +7,11 @@
   align-items: center;
 }
 
+.card__item_wrapper {
+  width: 100%;
+  cursor: pointer;
+}
+
 .card__item {
   display: flex;
   flex-direction: row;
@@ -18,11 +23,6 @@
   border: 1px solid $grey200;
   border-radius: 0.75rem;
   line-height: 125%;
-  cursor: pointer;
-
-  @media (max-width: 991px) {
-    max-width: none;
-  }
 }
 
 .vacancy__item {
