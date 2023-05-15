@@ -47,7 +47,7 @@ const Vacancy = () => {
         type_of_work={type_of_work}
         currency={currency}
       />
-      <Transcription vacancyRichText={vacancyRichText} />
+      {vacancyRichText ? <Transcription vacancyRichText={vacancyRichText} /> : <></>}
     </div>
   );
 };
