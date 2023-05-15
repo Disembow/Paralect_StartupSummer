@@ -1,9 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './Filters.module.scss';
 import { Select, CloseButton, NumberInput, Button } from '@mantine/core';
 import { IconChevronDown, IconSelector } from '@tabler/icons-react';
+import { useAppSelector } from '../../../app/hooks';
+
+type TFilters = {
+  select: string;
+  salaryFrom: number;
+  salaryTo: number;
+};
+
+const initialValue: TFilters = {
+  select: '',
+  salaryFrom: 0,
+  salaryTo: 0,
+};
 
 const Filters = () => {
+  const [value, setValue] = useState<TFilters>(initialValue);
+
+  const industries = useAppSelector((state) => state.industries.industries).map((e) => {
+    return {
+      value: e.title_rus,
+      label: e.title_rus,
+      key: e.key,
+    };
+  });
+
   const labelProps = {
     style: {
       fontWeight: 700,
@@ -27,6 +50,7 @@ const Filters = () => {
     <form
       onSubmit={(e) => {
         e.preventDefault();
+        console.log(value);
       }}
       className={styles.filters__container}
     >
@@ -42,6 +66,12 @@ const Filters = () => {
         </div>
       </div>
       <Select
+        onChange={(e) =>
+          setValue({
+            ...value,
+            ...{ select: e ? e : '' },
+          })
+        }
         label="Отрасль"
         labelProps={labelProps}
         placeholder="Выберете отрасль"
@@ -51,14 +81,18 @@ const Filters = () => {
           input: {
             '::placeholder': placeholderStyle,
           },
+          dropdown: {
+            borderRadius: '0.5rem',
+            '[data-hovered]': {
+              backgroundColor: '#DEECFF',
+            },
+            '[data-selected]': {
+              backgroundColor: '#5E96FC',
+            },
+          },
         }}
-        data={[
-          { value: 'test1', label: 'Test1' },
-          { value: 'test2', label: 'Test2' },
-          { value: 'test3', label: 'Test3' },
-          { value: 'test4', label: 'Test4' },
-        ]}
-        transitionProps={{ transition: 'pop-top-left', duration: 80, timingFunction: 'ease' }}
+        data={industries}
+        transitionProps={{ transition: 'pop-top-left', duration: 100, timingFunction: 'ease' }}
         withinPortal
         mb={'16px'}
         size="md"
@@ -80,6 +114,12 @@ const Filters = () => {
             '::placeholder': placeholderStyle,
           },
         }}
+        onChange={(e) =>
+          setValue({
+            ...value,
+            ...{ salaryFrom: e === '' ? 0 : e },
+          })
+        }
       />
       <NumberInput
         placeholder="До"
@@ -95,6 +135,12 @@ const Filters = () => {
             '::placeholder': placeholderStyle,
           },
         }}
+        onChange={(e) =>
+          setValue({
+            ...value,
+            ...{ salaryTo: e === '' ? 0 : e },
+          })
+        }
       />
       <Button type="submit" className={styles.button__submit}>
         Применить

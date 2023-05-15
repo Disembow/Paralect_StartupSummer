@@ -7,6 +7,7 @@ import { Center, Loader } from '@mantine/core';
 import { LAST_PAGE, fetchJobs, getURLString } from '../../app/slices/cardsSlice';
 import Cards from './UI/Cards';
 import StyledPagination from './UI/StyledPagination';
+import { fetchIndustries } from '../../app/slices/industriesSlice';
 
 const SearchPage = () => {
   const jobsData = useAppSelector((state) => state.cards.jobsData);
@@ -16,9 +17,11 @@ const SearchPage = () => {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    const URL = getURLString('page', page);
+    const jobsURL = getURLString('page', page);
+    dispatch(fetchJobs(['', jobsURL]));
 
-    dispatch(fetchJobs(['', URL]));
+    const industriesURL = getURLString('industries');
+    dispatch(fetchIndustries([industriesURL]));
   }, [page, dispatch]);
 
   return (

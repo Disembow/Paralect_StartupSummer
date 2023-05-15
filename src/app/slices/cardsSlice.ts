@@ -46,6 +46,7 @@ const cardsSlice = createSlice({
 
 const API_LINK = 'https://startup-summer-2023-proxy.onrender.com/2.0/';
 const API_VACANCIES = 'vacancies/';
+const API_INDUSTRIES = 'catalogues/';
 export const JOBS_PER_PAGE = 10;
 export const JOBS_COUNT = 500;
 export const LAST_PAGE = Math.ceil(JOBS_COUNT / JOBS_PER_PAGE);
@@ -58,22 +59,27 @@ const X_SECRET_KEY = 'GEU4nvd3rej*jeh.eqp';
 const ACCESS_TOKEN =
   'v3.r.137440105.598ef3d494612bd0415f785c6b338da125336009.c1d676d245a866973f96514e3771b2679bfd84c5';
 
-const headers = {
+export const headers = {
   'Content-Type': 'application/json',
   'x-secret-key': X_SECRET_KEY,
   'X-Api-App-Id': CLIENT_SECRET,
   Authorization: `Bearer ${ACCESS_TOKEN}`,
 };
 
-export const getURLString = (type: 'id' | 'page' | '', payload: number): string => {
+export const getURLString = (
+  type: 'id' | 'page' | 'industries' | '',
+  payload?: number | string
+): string => {
   switch (type) {
     case 'id':
       return `${API_LINK}${API_VACANCIES}${payload}`;
     case 'page':
       return `${API_LINK}${API_VACANCIES}?page=${payload}&count=${JOBS_PER_PAGE}`;
+    case 'industries':
+      return `${API_LINK}${API_INDUSTRIES}`;
+    default:
+      return '';
   }
-
-  return '';
 };
 
 export const fetchJobs = createAsyncThunk<TData, [string, string]>(

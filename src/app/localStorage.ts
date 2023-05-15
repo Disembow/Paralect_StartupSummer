@@ -15,5 +15,3 @@ export const getOneFavorite = (id: number | string): TJobsDate[] => {
     .filter((e) => e.id === Number(id))
     .flat();
 };
-
-console.log(!getOneFavorite(34797524));
