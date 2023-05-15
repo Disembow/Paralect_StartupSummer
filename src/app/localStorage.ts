@@ -10,8 +10,10 @@ export const getFavourits = (): TJobsDate[] => {
   return [];
 };
 
-export const getOneFavorite = (id: number): TJobsDate[] => {
-  return getFavourits().filter((e) => e.id === id);
+export const getOneFavorite = (id: number | string): TJobsDate[] => {
+  return getFavourits()
+    .filter((e) => e.id === Number(id))
+    .flat();
 };
 
-// console.log(getOneFavorite(34797524));
+console.log(!getOneFavorite(34797524));

@@ -4,9 +4,23 @@ import styles from './Vacancy.module.scss';
 import { useAppSelector } from '../../../app/hooks';
 import Card from '../../searchPage/UI/Card';
 import Transcription from './Transcription';
+import { getOneFavorite } from '../../../app/localStorage';
 
 const Vacancy = () => {
-  const { id: route } = useParams();
+  const { id: routeId } = useParams();
+  let data;
+
+  const storageData = getOneFavorite(routeId!);
+  const storeData = useAppSelector((state) =>
+    state.cards.jobsData.flat().filter((e) => e.id === Number(routeId))
+  );
+
+  if (storageData.length) {
+    console.log('click');
+    data = storageData;
+  } else {
+    data = storeData;
+  }
 
   const {
     id,
@@ -18,9 +32,7 @@ const Vacancy = () => {
     type_of_work,
     currency,
     vacancyRichText,
-  } = useAppSelector(
-    (state) => state.cards.jobsData.flat().filter((e) => e.id === Number(route))[0]
-  );
+  } = data[0];
 
   return (
     <div className={styles.wrapper}>
