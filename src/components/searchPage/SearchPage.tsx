@@ -3,8 +3,8 @@ import Filters from './UI/Filters';
 import SearchBar from './UI/SearchBar';
 import styles from './SearchPage.module.scss';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { Center, Loader /*, Pagination*/ } from '@mantine/core';
-import { LAST_PAGE, fetchJobs } from '../../app/slices/cardsSlice';
+import { Center, Loader } from '@mantine/core';
+import { LAST_PAGE, fetchJobs, getURLString } from '../../app/slices/cardsSlice';
 import Cards from './UI/Cards';
 import StyledPagination from './UI/StyledPagination';
 
@@ -16,7 +16,9 @@ const SearchPage = () => {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    dispatch(fetchJobs(['', page]));
+    const URL = getURLString('page', page);
+
+    dispatch(fetchJobs(['', URL]));
   }, [page, dispatch]);
 
   return (

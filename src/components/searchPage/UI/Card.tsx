@@ -1,7 +1,10 @@
 import React, { FC, useEffect, useState } from 'react';
 import { setFavourits, getFavourits } from '../../../app/localStorage';
 import { TJobsDate } from '../../../types/dataType';
+import { useNavigate } from 'react-router';
 import styles from './Card.module.scss';
+import { fetchJobs, getURLString } from '../../../app/slices/cardsSlice';
+import { useAppDispatch } from '../../../app/hooks';
 
 const Card: FC<TJobsDate> = ({
   id,
@@ -13,6 +16,15 @@ const Card: FC<TJobsDate> = ({
   type_of_work,
   currency,
 }) => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  const goToVacancyPage = (id: number) => {
+    // dispatch(fetchJobs(getURLString('id', id)));
+
+    navigate(`${id}`);
+  };
+
   const [isFavourite, setIsFavourite] = useState<boolean>(false);
   const [card, setCard] = useState<TJobsDate | null>(null);
 
@@ -44,17 +56,19 @@ const Card: FC<TJobsDate> = ({
 
     const currStorage = getFavourits();
 
-    if (!isFavourite && !currStorage) {
-      setFavourits([card!]);
-    } else if (!isFavourite && currStorage) {
-      setFavourits([card!, ...currStorage]);
-    } else if (currStorage) {
-      setFavourits(currStorage.filter((e) => e.id !== card?.id));
+    if (card) {
+      if (!isFavourite && !currStorage) {
+        setFavourits([card]);
+      } else if (!isFavourite && currStorage) {
+        setFavourits([card, ...currStorage]);
+      } else if (currStorage) {
+        setFavourits(currStorage.filter((e) => e.id !== card?.id));
+      }
     }
   };
 
   return (
-    <div className={styles.card__item}>
+    <div className={styles.card__item} onClick={() => goToVacancyPage(id)}>
       <div className={styles.vacancy__item}>
         <h4 className={styles.vacancy__title}>{profession}</h4>
         <div className={styles.vacancy__terms}>

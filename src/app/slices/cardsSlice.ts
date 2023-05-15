@@ -50,26 +50,40 @@ export const JOBS_PER_PAGE = 10;
 export const JOBS_COUNT = 500;
 export const LAST_PAGE = Math.ceil(JOBS_COUNT / JOBS_PER_PAGE);
 
+//! remove into .env.local or .env.client
 const CLIENT_SECRET =
-  'v3.r.137440105.ffdbab114f92b821eac4e21f485343924a773131.06c3bdbb8446aeb91c35b80c42ff69eb9c457948'; //! remove into .env.local or .env.client
+  'v3.r.137440105.ffdbab114f92b821eac4e21f485343924a773131.06c3bdbb8446aeb91c35b80c42ff69eb9c457948';
+const X_SECRET_KEY = 'GEU4nvd3rej*jeh.eqp';
+//!TODO add registation call with refresh token
+const ACCESS_TOKEN =
+  'v3.r.137440105.598ef3d494612bd0415f785c6b338da125336009.c1d676d245a866973f96514e3771b2679bfd84c5';
 
-export const fetchJobs = createAsyncThunk<TData, [string, number]>(
+const headers = {
+  'Content-Type': 'application/json',
+  'x-secret-key': X_SECRET_KEY,
+  'X-Api-App-Id': CLIENT_SECRET,
+  Authorization: `Bearer ${ACCESS_TOKEN}`,
+};
+
+export const getURLString = (type: 'id' | 'page' | '', payload: number): string => {
+  switch (type) {
+    case 'id':
+      return `${API_LINK}${API_VACANCIES}/${payload}`;
+    case 'page':
+      return `${API_LINK}${API_VACANCIES}?page=${payload}&count=${JOBS_PER_PAGE}`;
+  }
+
+  return '';
+};
+
+export const fetchJobs = createAsyncThunk<TData, [string, string]>(
   'auth/fetchJobs',
-  async ([search, page = 1], { rejectWithValue }) => {
+  async ([search, URL], { rejectWithValue }) => {
     if (!search || search === '') {
-      const response = await fetch(
-        `${API_LINK}${API_VACANCIES}?page=${page}&count=${JOBS_PER_PAGE}`,
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'x-secret-key': 'GEU4nvd3rej*jeh.eqp',
-            'X-Api-App-Id': CLIENT_SECRET,
-            Authorization:
-              'Bearer v3.r.137440105.598ef3d494612bd0415f785c6b338da125336009.c1d676d245a866973f96514e3771b2679bfd84c5',
-          },
-        }
-      );
+      const response = await fetch(URL, {
+        method: 'GET',
+        headers: { ...headers },
+      });
 
       if (!response.ok) {
         return rejectWithValue('Невозможно получить данные с этого ресурса');
