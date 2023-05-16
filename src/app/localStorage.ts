@@ -34,3 +34,7 @@ export const getAuthData = () => {
 
   return null;
 };
+
+export const removeAuthData = () => {
+  localStorage.removeItem('paralect_data');
+};
