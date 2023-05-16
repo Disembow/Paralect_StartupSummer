@@ -1,9 +1,11 @@
 import React, { FC, useState } from 'react';
 import styles from './Filters.module.scss';
-import { Select, CloseButton, NumberInput, Button } from '@mantine/core';
-import { IconChevronDown, IconSelector } from '@tabler/icons-react';
+import { NumberInput, Button } from '@mantine/core';
+import { IconSelector } from '@tabler/icons-react';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { TFilters, setSearchValue } from '../../../app/slices/cardsSlice';
+import FilterHeader from './FilterHeader';
+import FilterSelect from './FilterSelect';
 
 const Filters: FC = () => {
   const dispatch = useAppDispatch();
@@ -56,54 +58,25 @@ const Filters: FC = () => {
     setParams({ select: 0, salaryFrom: '', salaryTo: '', page: 1 });
   };
 
+  const selectChangeHandler = (e: string | null) => {
+    setParams({
+      ...params,
+      ...{ select: e ? Number(e) : 0 },
+    });
+  };
+
   return (
     <form onSubmit={(e) => submitHandler(e)} className={styles.filters__container}>
-      <div className={styles.filters__header}>
-        <h4 className={styles.filters__title}>Фильтры</h4>
-        <div className={styles.button__cross} onClick={(e) => clearAllFilters(e)}>
-          <p className={styles.button__title}>Сбросить все</p>
-          <CloseButton
-            aria-label="Cleare all filters"
-            iconSize={13}
-            className={styles.cross__item}
-          />
-        </div>
-      </div>
-      <Select
-        onChange={(e) => {
-          setParams({
-            ...params,
-            ...{ select: e ? Number(e) : 0 },
-          });
-        }}
-        label="Отрасль"
+      <FilterHeader clickHandler={clearAllFilters} />
+      <FilterSelect
+        onChange={(e) => selectChangeHandler(e)}
         labelProps={labelProps}
-        placeholder="Выберете отрасль"
-        rightSection={<IconChevronDown size="1.5rem" color="#ACADB9" />}
         data={industries}
         defaultValue={select.toString()}
         value={params.select.toString()}
-        styles={{
-          rightSection: { pointerEvents: 'none' },
-          input: {
-            '::placeholder': placeholderStyle,
-          },
-          dropdown: {
-            borderRadius: '0.5rem',
-            '[data-hovered]': {
-              backgroundColor: '#DEECFF',
-            },
-            '[data-selected]': {
-              backgroundColor: '#5E96FC',
-            },
-          },
-        }}
-        transitionProps={{ transition: 'pop-top-left', duration: 100, timingFunction: 'ease' }}
-        withinPortal
-        mb={'16px'}
-        size="md"
-        radius={8}
+        placeholderStyle={placeholderStyle}
       />
+
       <NumberInput
         placeholder="От"
         step={100}

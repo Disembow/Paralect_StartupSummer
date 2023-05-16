@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './SearchPage.module.scss';
+import styles from './Card.module.scss';
 import { Center } from '@mantine/core';
 
 const EmptyState = () => {

@@ -8,7 +8,7 @@ interface IInitState {
   isLoading: boolean;
 }
 
-type TIndustiesData = {
+export type TIndustiesData = {
   title_rus: string;
   key: number;
 };
