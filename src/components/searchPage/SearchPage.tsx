@@ -4,10 +4,11 @@ import SearchBar from './UI/SearchBar';
 import styles from './SearchPage.module.scss';
 import { useAppDispatch, useAppSelector, useJobsCount } from '../../app/hooks';
 import { Center, Loader } from '@mantine/core';
-import { fetchJobs, getURLString, setSearchValue } from '../../app/slices/cardsSlice';
+import { fetchJobs, setSearchValue } from '../../app/slices/cardsSlice';
 import Cards from './UI/Cards';
 import StyledPagination from './UI/StyledPagination';
 import { fetchIndustries } from '../../app/slices/industriesSlice';
+import { getURLString } from '../../app/api';
 
 const SearchPage = () => {
   const jobsData = useAppSelector((state) => state.cards.jobsData);
