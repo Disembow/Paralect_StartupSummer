@@ -13,15 +13,15 @@ const Filters: FC = () => {
       label: e.title_rus,
     };
   });
-  const { keyword, salaryFrom, salaryTo, select } = useAppSelector(
+  const { keyword, salaryFrom, salaryTo, select, page } = useAppSelector(
     (state) => state.cards.searchParams
   );
 
   const [params, setParams] = useState<Omit<TFilters, 'keyword'>>({
-    select: select,
-    salaryFrom: salaryFrom,
-    salaryTo: salaryTo,
-    page: 1,
+    select,
+    salaryFrom,
+    salaryTo,
+    page,
   });
 
   const labelProps = {
@@ -45,7 +45,7 @@ const Filters: FC = () => {
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(setSearchValue({ ...params, keyword }));
+    dispatch(setSearchValue({ ...params, keyword, page: 1 }));
   };
 
   return (

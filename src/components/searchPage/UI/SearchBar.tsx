@@ -11,7 +11,7 @@ const SearchBar = () => {
   const searchParams = useAppSelector((state) => state.cards.searchParams);
 
   const clickHandler = () => {
-    dispatch(setSearchValue({ ...searchParams, ...{ keyword: ref.current?.value } }));
+    dispatch(setSearchValue({ ...searchParams, ...{ keyword: ref.current?.value, page: 1 } }));
   };
 
   return (

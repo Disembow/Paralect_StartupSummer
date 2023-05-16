@@ -13,6 +13,7 @@ const SearchPage = () => {
   const jobsData = useAppSelector((state) => state.cards.jobsData);
   const isLoading = useAppSelector((state) => state.cards.isLoading);
   const searchParams = useAppSelector((state) => state.cards.searchParams);
+  const { page } = searchParams;
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -40,6 +41,7 @@ const SearchPage = () => {
           )}
           <StyledPagination
             total={LAST_PAGE}
+            defaultPage={page}
             onChange={(e) =>
               dispatch(
                 setSearchValue({
