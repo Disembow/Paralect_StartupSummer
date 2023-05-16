@@ -22,7 +22,7 @@ const BurgerMenu = () => {
         right={0}
         opened={isBurgerOpen}
         onClick={toggle}
-        size={30}
+        size={28}
         m={'0.5rem 1rem'}
       />
       <div className={`burger__wrapper ${isBurgerOpen ? 'open' : ''}`}>
