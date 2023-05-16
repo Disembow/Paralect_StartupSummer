@@ -9,6 +9,7 @@ import Cards from './UI/Cards';
 import StyledPagination from './UI/StyledPagination';
 import { fetchIndustries } from '../../app/slices/industriesSlice';
 import { getURLString } from '../../app/api';
+import EmptyState from './UI/EmptyState';
 
 const SearchPage = () => {
   const jobsData = useAppSelector((state) => state.cards.jobsData);
@@ -37,8 +38,10 @@ const SearchPage = () => {
             <Center>
               <Loader size={64} />
             </Center>
-          ) : (
+          ) : jobsData.flat().length > 0 ? (
             <Cards data={jobsData} />
+          ) : (
+            <EmptyState />
           )}
           <StyledPagination
             total={useJobsCount()}
