@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Cards from '../searchPage/UI/Cards';
 import EmptyLayout from './UI/EmptyLayout';
 import { getFavourits } from '../../app/localStorage';
 import StyledPagination from '../searchPage/UI/StyledPagination';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { setFavouritsCurrPage } from '../../app/slices/cardsSlice';
 
 const FavoritesPage = () => {
-  const [page, setPage] = useState(1);
+  const dispatch = useAppDispatch();
+  const page = useAppSelector((state) => state.cards.favouritsCurrPage);
 
   const ITEMS_ON_FAVORITE_PAGE = 5;
 
@@ -23,7 +26,7 @@ const FavoritesPage = () => {
           <Cards data={favourits.slice(start, end)} />
           <StyledPagination
             total={total}
-            onChange={setPage}
+            onChange={(e) => dispatch(setFavouritsCurrPage(e))}
             defaultPage={page}
             margin="6.5rem 0 2.75rem 0"
           />

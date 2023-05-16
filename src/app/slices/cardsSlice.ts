@@ -16,6 +16,7 @@ interface IInitState {
   isBurgerOpen: boolean;
   jobsCount: number;
   searchParams: TFilters;
+  favouritsCurrPage: number;
 }
 
 const initialState: IInitState = {
@@ -31,6 +32,7 @@ const initialState: IInitState = {
     page: 1,
     keyword: '',
   },
+  favouritsCurrPage: 1,
 };
 
 const cardsSlice = createSlice({
@@ -42,6 +44,9 @@ const cardsSlice = createSlice({
     },
     setSearchValue(state, action) {
       state.searchParams = action.payload;
+    },
+    setFavouritsCurrPage(state, action) {
+      state.favouritsCurrPage = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -125,6 +130,6 @@ export const fetchJobs = createAsyncThunk<TData, [string, string]>(
   }
 );
 
-export const { setIsBurgerOpen, setSearchValue } = cardsSlice.actions;
+export const { setIsBurgerOpen, setSearchValue, setFavouritsCurrPage } = cardsSlice.actions;
 
 export default cardsSlice.reducer;
