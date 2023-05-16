@@ -1,22 +1,25 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import styles from './Filters.module.scss';
 import { Select, CloseButton, NumberInput, Button } from '@mantine/core';
 import { IconChevronDown, IconSelector } from '@tabler/icons-react';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { setSearchValue } from '../../../app/slices/cardsSlice';
+import { TFilters, setSearchValue } from '../../../app/slices/cardsSlice';
 
-interface IFilter {
-  submitHandler: (e: React.FormEvent<HTMLFormElement>) => void;
-}
-
-const Filters: FC<IFilter> = ({ submitHandler }) => {
+const Filters: FC = () => {
   const dispatch = useAppDispatch();
-  const searchParams = useAppSelector((state) => state.cards.searchParams);
   const industries = useAppSelector((state) => state.industries.industries).map((e) => {
     return {
       value: e.key.toString(),
       label: e.title_rus,
     };
+  });
+
+  const [params, setParams] = useState<TFilters>({
+    select: 0,
+    salaryFrom: 0,
+    salaryTo: 0,
+    page: 1,
+    keyword: '',
   });
 
   const labelProps = {
@@ -38,14 +41,13 @@ const Filters: FC<IFilter> = ({ submitHandler }) => {
     return <IconSelector strokeWidth="1.25" color="#ACADB9" />;
   };
 
+  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    dispatch(setSearchValue(params));
+  };
+
   return (
-    <form
-      // onSubmit={(e) => {
-      //   e.preventDefault();
-      // }}
-      onSubmit={(e) => submitHandler(e)}
-      className={styles.filters__container}
-    >
+    <form onSubmit={(e) => submitHandler(e)} className={styles.filters__container}>
       <div className={styles.filters__header}>
         <h4 className={styles.filters__title}>Фильтры</h4>
         <div className={styles.button__cross}>
@@ -59,12 +61,10 @@ const Filters: FC<IFilter> = ({ submitHandler }) => {
       </div>
       <Select
         onChange={(e) =>
-          dispatch(
-            setSearchValue({
-              ...searchParams,
-              ...{ select: e },
-            })
-          )
+          setParams({
+            ...params,
+            ...{ select: e ? Number(e) : 0 },
+          })
         }
         label="Отрасль"
         labelProps={labelProps}
@@ -108,14 +108,12 @@ const Filters: FC<IFilter> = ({ submitHandler }) => {
             '::placeholder': placeholderStyle,
           },
         }}
-        onChange={(e) =>
-          dispatch(
-            setSearchValue({
-              ...searchParams,
-              ...{ salaryFrom: e },
-            })
-          )
-        }
+        onChange={(e) => {
+          setParams({
+            ...params,
+            ...{ salaryFrom: e ? Number(e) : 0 },
+          });
+        }}
       />
       <NumberInput
         placeholder="До"
@@ -131,14 +129,12 @@ const Filters: FC<IFilter> = ({ submitHandler }) => {
             '::placeholder': placeholderStyle,
           },
         }}
-        onChange={(e) =>
-          dispatch(
-            setSearchValue({
-              ...searchParams,
-              ...{ salaryTo: e },
-            })
-          )
-        }
+        onChange={(e) => {
+          setParams({
+            ...params,
+            ...{ salaryTo: e ? Number(e) : 0 },
+          });
+        }}
       />
       <Button type="submit" className={styles.button__submit}>
         Применить

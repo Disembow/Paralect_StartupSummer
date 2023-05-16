@@ -6,6 +6,7 @@ export interface TFilters {
   salaryFrom: number;
   salaryTo: number;
   page: number;
+  keyword: string;
 }
 
 interface IInitState {
@@ -28,6 +29,7 @@ const initialState: IInitState = {
     salaryFrom: 0,
     salaryTo: 0,
     page: 1,
+    keyword: '',
   },
 };
 

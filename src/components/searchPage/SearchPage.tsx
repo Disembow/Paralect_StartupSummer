@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Filters from './UI/Filters';
 import SearchBar from './UI/SearchBar';
 import styles from './SearchPage.module.scss';
@@ -13,29 +13,22 @@ const SearchPage = () => {
   const jobsData = useAppSelector((state) => state.cards.jobsData);
   const isLoading = useAppSelector((state) => state.cards.isLoading);
   const searchParams = useAppSelector((state) => state.cards.searchParams);
-  const { page } = searchParams;
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const industriesURL = getURLString('industries');
+    dispatch(fetchIndustries([industriesURL]));
+  }, [dispatch]);
 
   useEffect(() => {
     const jobsURL = getURLString('filter', searchParams);
     dispatch(fetchJobs(['', jobsURL]));
-    console.log(jobsURL);
-
-    const industriesURL = getURLString('industries');
-    dispatch(fetchIndustries([industriesURL]));
-  }, [dispatch, page]);
-
-  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const jobsURL = getURLString('filter', searchParams);
-    dispatch(fetchJobs(['', jobsURL]));
-    console.log(jobsURL);
-  };
+  }, [dispatch, searchParams]);
 
   return (
     <>
       <div className={styles.container}>
-        <Filters submitHandler={submitHandler} />
+        <Filters />
         <div className={styles.search}>
           <SearchBar />
           {isLoading ? (
