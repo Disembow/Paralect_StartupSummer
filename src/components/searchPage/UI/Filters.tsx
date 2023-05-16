@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import styles from './Filters.module.scss';
 import { Select, CloseButton, NumberInput, Button } from '@mantine/core';
 import { IconChevronDown, IconSelector } from '@tabler/icons-react';
@@ -18,11 +18,15 @@ const Filters: FC = () => {
   );
 
   const [params, setParams] = useState<Omit<TFilters, 'keyword'>>({
-    select,
-    salaryFrom,
-    salaryTo,
+    select: select,
+    salaryFrom: salaryFrom,
+    salaryTo: salaryTo,
     page,
   });
+
+  useEffect(() => {
+    console.log(params);
+  }, [params]);
 
   const labelProps = {
     style: {
@@ -48,11 +52,16 @@ const Filters: FC = () => {
     dispatch(setSearchValue({ ...params, keyword, page: 1 }));
   };
 
+  const clearAllFilters = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.preventDefault();
+    dispatch(setSearchValue({ ...params, select: '', salaryFrom: '', salaryTo: '', keyword }));
+  };
+
   return (
     <form onSubmit={(e) => submitHandler(e)} className={styles.filters__container}>
       <div className={styles.filters__header}>
         <h4 className={styles.filters__title}>Фильтры</h4>
-        <div className={styles.button__cross}>
+        <div className={styles.button__cross} onClick={(e) => clearAllFilters(e)}>
           <p className={styles.button__title}>Сбросить все</p>
           <CloseButton
             aria-label="Cleare all filters"
@@ -63,7 +72,6 @@ const Filters: FC = () => {
       </div>
       <Select
         onChange={(e) => {
-          console.log(e);
           setParams({
             ...params,
             ...{ select: e ? Number(e) : 0 },
@@ -75,6 +83,7 @@ const Filters: FC = () => {
         rightSection={<IconChevronDown size="1.5rem" color="#ACADB9" />}
         data={industries}
         defaultValue={select.toString()}
+        value={params.select.toString()}
         styles={{
           rightSection: { pointerEvents: 'none' },
           input: {
@@ -107,6 +116,7 @@ const Filters: FC = () => {
         radius={8}
         rightSection={<CustomIconSelector />}
         defaultValue={salaryFrom}
+        value={params.salaryFrom}
         styles={{
           rightSection: { pointerEvents: 'none' },
           input: {
@@ -116,7 +126,7 @@ const Filters: FC = () => {
         onChange={(e) => {
           setParams({
             ...params,
-            ...{ salaryFrom: e ? Number(e) : 0 },
+            ...{ salaryFrom: e !== '' ? Number(e) : '' },
           });
         }}
       />
@@ -129,6 +139,7 @@ const Filters: FC = () => {
         radius={8}
         rightSection={<CustomIconSelector />}
         defaultValue={salaryTo}
+        value={params.salaryTo}
         styles={{
           rightSection: { pointerEvents: 'none' },
           input: {
@@ -138,7 +149,7 @@ const Filters: FC = () => {
         onChange={(e) => {
           setParams({
             ...params,
-            ...{ salaryTo: e ? Number(e) : 0 },
+            ...{ salaryTo: e !== '' ? Number(e) : '' },
           });
         }}
       />

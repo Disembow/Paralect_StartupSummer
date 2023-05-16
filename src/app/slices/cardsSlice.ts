@@ -3,8 +3,8 @@ import { TData, TJobsDate } from '../../types/dataType';
 
 export interface TFilters {
   select: number;
-  salaryFrom: number;
-  salaryTo: number;
+  salaryFrom: number | '';
+  salaryTo: number | '';
   page: number;
   keyword: string;
 }
@@ -26,8 +26,8 @@ const initialState: IInitState = {
   jobsCount: 0,
   searchParams: {
     select: 0,
-    salaryFrom: 0,
-    salaryTo: 0,
+    salaryFrom: '',
+    salaryTo: '',
     page: 1,
     keyword: '',
   },

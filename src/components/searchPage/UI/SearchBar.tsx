@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
 import { Button, Input } from '@mantine/core';
 import { IconSearch } from '@tabler/icons-react';
 import styles from './SearchBar.module.scss';
@@ -6,21 +6,26 @@ import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { setSearchValue } from '../../../app/slices/cardsSlice';
 
 const SearchBar = () => {
-  const ref = useRef<HTMLInputElement>(null);
+  const [value, setValue] = useState('');
   const dispatch = useAppDispatch();
   const searchParams = useAppSelector((state) => state.cards.searchParams);
 
   const clickHandler = () => {
-    dispatch(setSearchValue({ ...searchParams, ...{ keyword: ref.current?.value, page: 1 } }));
+    dispatch(setSearchValue({ ...searchParams, ...{ keyword: value, page: 1 } }));
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') clickHandler();
   };
 
   return (
     <>
       <Input
-        ref={ref}
         min-width={'100%'}
         icon={<IconSearch size="1.2rem" />}
         placeholder="Введите название вакансии"
+        onChange={(e) => setValue(e.target.value)}
+        onKeyPress={(e) => handleKeyPress(e)}
         defaultValue={searchParams.keyword}
         styles={{
           input: {
