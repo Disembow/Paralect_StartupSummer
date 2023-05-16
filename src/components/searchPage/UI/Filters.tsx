@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 import styles from './Filters.module.scss';
 import { Select, CloseButton, NumberInput, Button } from '@mantine/core';
 import { IconChevronDown, IconSelector } from '@tabler/icons-react';
@@ -23,10 +23,6 @@ const Filters: FC = () => {
     salaryTo: salaryTo,
     page: page,
   });
-
-  useEffect(() => {
-    console.log(params);
-  }, [params]);
 
   const labelProps = {
     style: {

@@ -21,7 +21,12 @@ const FavoritesPage = () => {
       {favourits.length > 0 ? (
         <>
           <Cards data={favourits.slice(start, end)} />
-          <StyledPagination total={total} onChange={setPage} margin="6.5rem 0 2.75rem 0" />
+          <StyledPagination
+            total={total}
+            onChange={setPage}
+            defaultPage={page}
+            margin="6.5rem 0 2.75rem 0"
+          />
         </>
       ) : (
         <EmptyLayout />

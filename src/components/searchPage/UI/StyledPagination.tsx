@@ -5,11 +5,10 @@ interface IPagination {
   total: number;
   onChange: React.Dispatch<React.SetStateAction<number>>;
   margin: string;
-  defaultPage?: number;
+  defaultPage: number;
 }
 
 const StyledPagination: FC<IPagination> = ({ total, onChange, margin, defaultPage }) => {
-  // console.log(defaultPage);
   return (
     <Pagination
       m={margin}
