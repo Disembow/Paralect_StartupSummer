@@ -54,7 +54,9 @@ const Filters: FC = () => {
 
   const clearAllFilters = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault();
-    dispatch(setSearchValue({ ...params, select: '', salaryFrom: '', salaryTo: '', keyword }));
+    dispatch(
+      setSearchValue({ ...params, select: '', salaryFrom: '', salaryTo: '', keyword, page: 1 })
+    );
     setParams({ select: 0, salaryFrom: '', salaryTo: '', page: 1 });
   };
 
