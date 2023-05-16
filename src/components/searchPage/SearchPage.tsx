@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import Filters from './UI/Filters';
 import SearchBar from './UI/SearchBar';
 import styles from './SearchPage.module.scss';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { useAppDispatch, useAppSelector, useJobsCount } from '../../app/hooks';
 import { Center, Loader } from '@mantine/core';
-import { LAST_PAGE, fetchJobs, getURLString, setSearchValue } from '../../app/slices/cardsSlice';
+import { fetchJobs, getURLString, setSearchValue } from '../../app/slices/cardsSlice';
 import Cards from './UI/Cards';
 import StyledPagination from './UI/StyledPagination';
 import { fetchIndustries } from '../../app/slices/industriesSlice';
@@ -40,7 +40,7 @@ const SearchPage = () => {
             <Cards data={jobsData} />
           )}
           <StyledPagination
-            total={LAST_PAGE}
+            total={useJobsCount()}
             defaultPage={page}
             onChange={(e) =>
               dispatch(

@@ -72,8 +72,6 @@ const API_LINK = 'https://startup-summer-2023-proxy.onrender.com/2.0/';
 const API_VACANCIES = 'vacancies/';
 const API_INDUSTRIES = 'catalogues/';
 export const JOBS_PER_PAGE = 10;
-export const JOBS_COUNT = 500;
-export const LAST_PAGE = Math.ceil(JOBS_COUNT / JOBS_PER_PAGE);
 
 //! remove into .env.local or .env.client
 const CLIENT_SECRET =
