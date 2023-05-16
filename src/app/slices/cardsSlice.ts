@@ -76,7 +76,7 @@ const CLIENT_SECRET =
 const X_SECRET_KEY = 'GEU4nvd3rej*jeh.eqp';
 //!TODO add registation call with refresh token
 const ACCESS_TOKEN =
-  'v3.r.137440105.598ef3d494612bd0415f785c6b338da125336009.c1d676d245a866973f96514e3771b2679bfd84c5';
+  'v3.r.137440105.bdacc672752631ab7e89da5f47766fd747f9da79.0da27c18be0fc41f28016ead175a443752edaece';
 
 export const headers = {
   'Content-Type': 'application/json',
@@ -97,8 +97,8 @@ export const getURLString = (
     case 'industries':
       return `${API_LINK}${API_INDUSTRIES}`;
     case 'filter':
-      const { salaryFrom, salaryTo, select, page } = payload as TFilters;
-      return `${API_LINK}${API_VACANCIES}?page=${page}&count=${JOBS_PER_PAGE}&published=1&payment_from=${salaryFrom}&payment_to=${salaryTo}&catalogues=${select}&no_agreement=1`;
+      const { salaryFrom, salaryTo, select, page, keyword } = payload as TFilters;
+      return `${API_LINK}${API_VACANCIES}?page=${page}&count=${JOBS_PER_PAGE}&published=1&payment_from=${salaryFrom}&payment_to=${salaryTo}&catalogues=${select}&no_agreement=1&keyword=${keyword}`;
     default:
       return '';
   }

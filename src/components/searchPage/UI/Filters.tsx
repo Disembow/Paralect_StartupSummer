@@ -13,13 +13,15 @@ const Filters: FC = () => {
       label: e.title_rus,
     };
   });
+  const { keyword, salaryFrom, salaryTo, select } = useAppSelector(
+    (state) => state.cards.searchParams
+  );
 
-  const [params, setParams] = useState<TFilters>({
-    select: 0,
-    salaryFrom: 0,
-    salaryTo: 0,
+  const [params, setParams] = useState<Omit<TFilters, 'keyword'>>({
+    select: select,
+    salaryFrom: salaryFrom,
+    salaryTo: salaryTo,
     page: 1,
-    keyword: '',
   });
 
   const labelProps = {
@@ -43,7 +45,7 @@ const Filters: FC = () => {
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(setSearchValue(params));
+    dispatch(setSearchValue({ ...params, keyword }));
   };
 
   return (
@@ -60,16 +62,19 @@ const Filters: FC = () => {
         </div>
       </div>
       <Select
-        onChange={(e) =>
+        onChange={(e) => {
+          console.log(e);
           setParams({
             ...params,
             ...{ select: e ? Number(e) : 0 },
-          })
-        }
+          });
+        }}
         label="Отрасль"
         labelProps={labelProps}
         placeholder="Выберете отрасль"
         rightSection={<IconChevronDown size="1.5rem" color="#ACADB9" />}
+        data={industries}
+        defaultValue={select.toString()}
         styles={{
           rightSection: { pointerEvents: 'none' },
           input: {
@@ -85,7 +90,6 @@ const Filters: FC = () => {
             },
           },
         }}
-        data={industries}
         transitionProps={{ transition: 'pop-top-left', duration: 100, timingFunction: 'ease' }}
         withinPortal
         mb={'16px'}
@@ -102,6 +106,7 @@ const Filters: FC = () => {
         label="Оклад"
         radius={8}
         rightSection={<CustomIconSelector />}
+        defaultValue={salaryFrom}
         styles={{
           rightSection: { pointerEvents: 'none' },
           input: {
@@ -123,6 +128,7 @@ const Filters: FC = () => {
         mb={'18px'}
         radius={8}
         rightSection={<CustomIconSelector />}
+        defaultValue={salaryTo}
         styles={{
           rightSection: { pointerEvents: 'none' },
           input: {
