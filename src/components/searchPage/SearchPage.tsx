@@ -23,7 +23,7 @@ const SearchPage = () => {
 
   useEffect(() => {
     const jobsURL = getURLString('filter', searchParams);
-    dispatch(fetchJobs(['', jobsURL]));
+    dispatch(fetchJobs([jobsURL]));
   }, [dispatch, searchParams]);
 
   return (

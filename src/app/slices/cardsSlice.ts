@@ -109,24 +109,20 @@ export const getURLString = (
   }
 };
 
-export const fetchJobs = createAsyncThunk<TData, [string, string]>(
+export const fetchJobs = createAsyncThunk<TData, [string]>(
   'auth/fetchJobs',
-  async ([search, URL], { rejectWithValue }) => {
-    if (!search || search === '') {
-      const response = await fetch(URL, {
-        method: 'GET',
-        headers: { ...headers },
-      });
+  async ([URL], { rejectWithValue }) => {
+    const response = await fetch(URL, {
+      method: 'GET',
+      headers: { ...headers },
+    });
 
-      if (!response.ok) {
-        return rejectWithValue('Невозможно получить данные с этого ресурса');
-      }
-
-      const data: TData = await response.json();
-      return data;
-    } else {
-      return {} as TData; // !update to search key from searchbar
+    if (!response.ok) {
+      return rejectWithValue('Невозможно получить данные с этого ресурса');
     }
+
+    const data: TData = await response.json();
+    return data;
   }
 );
 
