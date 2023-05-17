@@ -50,7 +50,6 @@ const FilterSelect: FC<IFilterSelect> = ({
         onChange(e);
       }}
       onClick={() => {
-        console.log('onClick');
         setActive(!active);
       }}
       label="Отрасль"
