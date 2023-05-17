@@ -39,6 +39,7 @@ const SearchBar = () => {
               borderColor: '#5e96fc',
             },
             caretColor: '#5e96fc',
+            borderColor: '#eaebed',
           },
           wrapper: {
             '[data-with-icon]': {
