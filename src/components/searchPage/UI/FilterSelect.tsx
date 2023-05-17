@@ -36,7 +36,7 @@ const FilterSelect: FC<IFilterSelect> = ({
   const ref = useRef<HTMLInputElement>(null);
 
   const handleClickOutside = () => {
-    setActive(!active);
+    if (active) setActive(!active);
   };
 
   useOnClickOutside(ref, handleClickOutside);
@@ -69,6 +69,9 @@ const FilterSelect: FC<IFilterSelect> = ({
         rightSection: { pointerEvents: 'none' },
         input: {
           '::placeholder': placeholderStyle,
+          ':focus': {
+            borderColor: '#5e96fc',
+          },
         },
         dropdown: {
           borderRadius: '0.5rem',

@@ -29,6 +29,14 @@
       color: $black;
     }
 
+    &:hover {
+      color: $black;
+
+      &:not(.active) {
+        color: $blue600;
+      }
+    }
+
     &:active {
       color: $blue600 !important;
     }

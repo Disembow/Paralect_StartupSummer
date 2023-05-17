@@ -34,9 +34,19 @@ const SearchBar = () => {
               fontSize: '0.875rem',
               fontFamily: 'Inter',
               fontWeight: 400,
-              position: 'relative',
-              left: '-1rem',
             },
+            ':hover': {
+              borderColor: '#5e96fc',
+            },
+            caretColor: '#5e96fc',
+          },
+          wrapper: {
+            '[data-with-icon]': {
+              padding: '0 0 0.2rem 2.3rem',
+            },
+          },
+          icon: {
+            padding: '0 0 0 0.35rem',
           },
         }}
         ff={'Inter'}

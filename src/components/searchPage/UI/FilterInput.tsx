@@ -55,6 +55,10 @@ const FilterInput: FC<IFilterInput> = ({
         rightSection: { pointerEvents: 'none' },
         input: {
           '::placeholder': placeholderStyle,
+          ':hover': {
+            borderColor: '#5e96fc',
+          },
+          caretColor: '#5e96fc',
         },
       }}
       onChange={onChange}

@@ -30,7 +30,7 @@ const Filters: FC = () => {
     style: {
       fontWeight: 700,
       fontFamily: 'Inter',
-      marginBottom: '0.45rem',
+      marginBottom: '0.42rem',
     },
   };
 
@@ -39,6 +39,7 @@ const Filters: FC = () => {
     fontWeight: 400,
     fontSize: '0.875rem',
     lineHeight: '150%',
+    margin: '0 0 0.5rem 0',
   };
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {

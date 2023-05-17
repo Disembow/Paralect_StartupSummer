@@ -5,6 +5,7 @@ import { getFavourits } from '../../app/localStorage';
 import StyledPagination from '../searchPage/UI/StyledPagination';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { setFavouritsCurrPage } from '../../app/slices/cardsSlice';
+import styles from './FavoritesPage.module.scss';
 
 const FavoritesPage = () => {
   const dispatch = useAppDispatch();
@@ -20,7 +21,7 @@ const FavoritesPage = () => {
   const end = start + ITEMS_ON_FAVORITE_PAGE;
 
   return (
-    <>
+    <div className={styles.wrapper}>
       {favourits.length > 0 ? (
         <>
           <Cards data={favourits.slice(start, end)} />
@@ -34,7 +35,7 @@ const FavoritesPage = () => {
       ) : (
         <EmptyLayout />
       )}
-    </>
+    </div>
   );
 };
 

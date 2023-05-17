@@ -1,6 +1,5 @@
 import React from 'react';
 import { useParams } from 'react-router';
-import styles from './Vacancy.module.scss';
 import { useAppSelector } from '../../../app/hooks';
 import Card from '../../searchPage/UI/Card';
 import Transcription from './Transcription';
@@ -35,7 +34,7 @@ const Vacancy = () => {
   } = data[0];
 
   return (
-    <div className={styles.wrapper}>
+    <>
       <Card
         key={id}
         id={id}
@@ -48,7 +47,7 @@ const Vacancy = () => {
         currency={currency}
       />
       {vacancyRichText ? <Transcription vacancyRichText={vacancyRichText} /> : <></>}
-    </div>
+    </>
   );
 };
 
