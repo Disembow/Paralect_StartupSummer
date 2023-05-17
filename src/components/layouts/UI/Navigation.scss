@@ -25,7 +25,7 @@
   &__item {
     text-decoration: none;
 
-    &:visited:not(.active) {
+    &:not(.active) {
       color: $black;
     }
 
