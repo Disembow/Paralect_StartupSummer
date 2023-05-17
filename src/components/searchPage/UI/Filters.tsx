@@ -66,7 +66,7 @@ const Filters: FC = () => {
       <FilterHeader clickHandler={clearAllFilters} />
 
       <FilterSelect
-        onChange={(e) => selectChangeHandler(e)}
+        onChange={selectChangeHandler}
         labelProps={labelProps}
         data={industries}
         defaultValue={select.toString()}
@@ -82,6 +82,7 @@ const Filters: FC = () => {
         defaultValue={salaryFrom}
         value={params.salaryFrom}
         placeholderStyle={placeholderStyle}
+        marginBottom="0.5rem"
         onChange={(e: number | '') => {
           setParams({
             ...params,
@@ -97,6 +98,7 @@ const Filters: FC = () => {
         defaultValue={salaryTo}
         value={params.salaryTo}
         placeholderStyle={placeholderStyle}
+        marginBottom="1.25rem"
         onChange={(e: number | '') => {
           setParams({
             ...params,

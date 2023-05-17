@@ -1,8 +1,12 @@
 @use '../../../styles' as *;
 
+.rightSection {
+  background-color: red;
+}
+
 .filters__container {
   font-family: 'Inter', sans-serif;
-  min-width: 19.7rem;
+  min-width: 19.6875rem;
   height: 22.5rem;
   padding: 1.25rem;
   border-radius: 0.75rem;

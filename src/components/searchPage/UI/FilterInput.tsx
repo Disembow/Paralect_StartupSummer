@@ -19,6 +19,7 @@ interface IFilterInput {
     [key: string]: string | number;
   };
   dataElem: string;
+  marginBottom: string;
 }
 
 const FilterInput: FC<IFilterInput> = ({
@@ -30,6 +31,7 @@ const FilterInput: FC<IFilterInput> = ({
   placeholderStyle,
   placeholder,
   dataElem,
+  marginBottom,
 }) => {
   const CustomIconSelector = () => {
     return <IconSelector strokeWidth="1.25" color="#ACADB9" />;
@@ -43,7 +45,7 @@ const FilterInput: FC<IFilterInput> = ({
       min={0}
       size="md"
       labelProps={labelProps}
-      mb={'8px'}
+      mb={marginBottom}
       label={label}
       radius={8}
       rightSection={<CustomIconSelector />}

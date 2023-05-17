@@ -3,8 +3,8 @@
 .container {
   display: flex;
   flex-direction: row;
-  gap: 1.3rem;
-  margin: 0 0.5rem;
+  gap: 1.4375rem;
+  margin: 0 0 0 0.3125rem;
 
   @media (max-width: 991px) {
     flex-direction: column;

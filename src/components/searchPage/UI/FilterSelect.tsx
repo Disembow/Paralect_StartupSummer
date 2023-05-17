@@ -1,6 +1,7 @@
-import React, { FC } from 'react';
+import React, { FC, useState, useRef } from 'react';
 import { Select } from '@mantine/core';
-import { IconChevronDown } from '@tabler/icons-react';
+import { IconChevronDown, IconChevronUp } from '@tabler/icons-react';
+import { useOnClickOutside } from 'usehooks-ts';
 
 interface IFilterSelect {
   onChange: (e: string | null) => void;
@@ -30,14 +31,38 @@ const FilterSelect: FC<IFilterSelect> = ({
   value,
   placeholderStyle,
 }) => {
+  const [active, setActive] = useState<boolean>(false);
+
+  const ref = useRef<HTMLInputElement>(null);
+
+  const handleClickOutside = () => {
+    setActive(!active);
+  };
+
+  useOnClickOutside(ref, handleClickOutside);
+
   return (
     <Select
+      className="select"
+      ref={ref}
       data-elem="industry-select"
-      onChange={onChange}
+      onChange={(e) => {
+        onChange(e);
+      }}
+      onClick={() => {
+        console.log('onClick');
+        setActive(!active);
+      }}
       label="Отрасль"
       labelProps={labelProps}
       placeholder="Выберете отрасль"
-      rightSection={<IconChevronDown size="1.5rem" color="#ACADB9" />}
+      rightSection={
+        active ? (
+          <IconChevronUp size="1.5rem" color="#5E96FC" />
+        ) : (
+          <IconChevronDown size="1.5rem" color="#ACADB9" />
+        )
+      }
       data={data}
       defaultValue={defaultValue}
       value={value}
@@ -48,11 +73,14 @@ const FilterSelect: FC<IFilterSelect> = ({
         },
         dropdown: {
           borderRadius: '0.5rem',
+          data: { height: '5rem' },
           '[data-hovered]': {
             backgroundColor: '#DEECFF',
+            borderRadius: '0.5rem',
           },
           '[data-selected]': {
             backgroundColor: '#5E96FC',
+            borderRadius: '0.5rem',
           },
         },
       }}
@@ -61,6 +89,7 @@ const FilterSelect: FC<IFilterSelect> = ({
       mb={'16px'}
       size="md"
       radius={8}
+      maxDropdownHeight={188}
     />
   );
 };
