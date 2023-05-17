@@ -27,7 +27,7 @@ const SearchPage = () => {
   useEffect(() => {
     if (getAuthData()) {
       const jobsURL = getURLString('filter', searchParams);
-      dispatch(fetchJobs([jobsURL]));
+      dispatch(fetchJobs([jobsURL, '']));
     }
   }, [dispatch, searchParams]);
 
@@ -44,7 +44,7 @@ const SearchPage = () => {
           ) : jobsData.flat().length > 0 ? (
             <Cards data={jobsData} />
           ) : (
-            <EmptyState />
+            getAuthData() && <EmptyState />
           )}
           <StyledPagination
             total={useJobsCount()}
