@@ -42,7 +42,7 @@ const SearchBar = () => {
           },
           wrapper: {
             '[data-with-icon]': {
-              padding: '0 0 0.2rem 2.3rem',
+              padding: '0 0 0.2rem 2.2rem',
             },
           },
           icon: {

@@ -16,6 +16,7 @@ export type TJobsDate = {
   payment_to: number;
   currency: string;
   vacancyRichText?: string;
+  cardType?: 'item';
 };
 
 export type TData = {

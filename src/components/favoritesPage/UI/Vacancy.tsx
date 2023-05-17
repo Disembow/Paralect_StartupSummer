@@ -4,6 +4,7 @@ import { useAppSelector } from '../../../app/hooks';
 import Card from '../../searchPage/UI/Card';
 import Transcription from './Transcription';
 import { getOneFavorite } from '../../../app/localStorage';
+import styles from './Vacancy.module.scss';
 
 const Vacancy = () => {
   const { id: routeId } = useParams();
@@ -15,7 +16,6 @@ const Vacancy = () => {
   );
 
   if (storageData.length) {
-    console.log('click');
     data = storageData;
   } else {
     data = storeData;
@@ -34,8 +34,9 @@ const Vacancy = () => {
   } = data[0];
 
   return (
-    <>
+    <div className={styles.wrapper}>
       <Card
+        cardType="item"
         key={id}
         id={id}
         profession={profession}
@@ -47,7 +48,7 @@ const Vacancy = () => {
         currency={currency}
       />
       {vacancyRichText ? <Transcription vacancyRichText={vacancyRichText} /> : <></>}
-    </>
+    </div>
   );
 };
 

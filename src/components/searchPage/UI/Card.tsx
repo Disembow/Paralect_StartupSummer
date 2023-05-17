@@ -4,6 +4,7 @@ import { TJobsDate } from '../../../types/dataType';
 import styles from './Card.module.scss';
 
 const Card: FC<TJobsDate> = ({
+  cardType,
   id,
   profession,
   firm_name,
@@ -71,8 +72,22 @@ const Card: FC<TJobsDate> = ({
   return (
     <div className={styles.card__item}>
       <div className={styles.vacancy__item}>
-        <h4 className={styles.vacancy__title}>{profession}</h4>
-        <div className={styles.vacancy__terms}>
+        <h4
+          className={
+            cardType
+              ? `${styles.vacancy__title} ${styles.vacancy__title_item}`
+              : styles.vacancy__title
+          }
+        >
+          {profession}
+        </h4>
+        <div
+          className={
+            cardType
+              ? `${styles.vacancy__terms} ${styles.vacancy__terms_item}`
+              : styles.vacancy__terms
+          }
+        >
           <span>{salary}</span>
           <span className={styles.vacancy__schedule}>{type_of_work.title}</span>
         </div>
