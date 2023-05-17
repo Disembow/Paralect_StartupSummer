@@ -75,6 +75,7 @@ const Filters: FC = () => {
       />
 
       <FilterInput
+        dataElem="salary-from-input"
         label="Оклад"
         labelProps={labelProps}
         placeholder="От"
@@ -90,6 +91,7 @@ const Filters: FC = () => {
       />
 
       <FilterInput
+        dataElem="salary-to-input"
         labelProps={labelProps}
         placeholder="До"
         defaultValue={salaryTo}
@@ -103,7 +105,7 @@ const Filters: FC = () => {
         }}
       />
 
-      <Button type="submit" className={styles.button__submit}>
+      <Button type="submit" className={styles.button__submit} data-elem="search-button">
         Применить
       </Button>
     </form>

@@ -21,6 +21,7 @@ const SearchBar = () => {
   return (
     <>
       <Input
+        data-elem="search-input"
         min-width={'100%'}
         icon={<IconSearch size="1.2rem" />}
         placeholder="Введите название вакансии"
@@ -55,6 +56,7 @@ const SearchBar = () => {
             lh={1.5}
             className={styles.search__button}
             onClick={clickHandler}
+            data-elem="search-button"
           >
             Поиск
           </Button>

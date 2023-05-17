@@ -84,6 +84,7 @@ const Card: FC<TJobsDate> = ({
       <div
         className={isFavourite ? styles.favorits__star_filled : styles.favorits__star_empty}
         onClick={(e) => addToFavourits(e)}
+        data-elem={`vacancy-${id}-shortlist-button`}
       />
     </div>
   );

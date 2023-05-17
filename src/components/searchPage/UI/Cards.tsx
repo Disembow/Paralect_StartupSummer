@@ -27,7 +27,12 @@ const Cards: FC<ICards> = ({ data }) => {
             currency,
             vacancyRichText,
           }) => (
-            <div key={id} className={styles.card__item_wrapper} onClick={() => navigate(`${id}`)}>
+            <div
+              key={id}
+              className={styles.card__item_wrapper}
+              onClick={() => navigate(`${id}`)}
+              data-elem={`vacancy-${id}`}
+            >
               <Card
                 type_of_work={type_of_work}
                 firm_name={firm_name}

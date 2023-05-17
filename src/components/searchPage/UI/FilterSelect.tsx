@@ -32,6 +32,7 @@ const FilterSelect: FC<IFilterSelect> = ({
 }) => {
   return (
     <Select
+      data-elem="industry-select"
       onChange={onChange}
       label="Отрасль"
       labelProps={labelProps}

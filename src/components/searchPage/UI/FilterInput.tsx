@@ -18,6 +18,7 @@ interface IFilterInput {
   placeholderStyle: {
     [key: string]: string | number;
   };
+  dataElem: string;
 }
 
 const FilterInput: FC<IFilterInput> = ({
@@ -28,6 +29,7 @@ const FilterInput: FC<IFilterInput> = ({
   value,
   placeholderStyle,
   placeholder,
+  dataElem,
 }) => {
   const CustomIconSelector = () => {
     return <IconSelector strokeWidth="1.25" color="#ACADB9" />;
@@ -35,6 +37,7 @@ const FilterInput: FC<IFilterInput> = ({
 
   return (
     <NumberInput
+      data-elem={dataElem}
       placeholder={placeholder}
       step={100}
       min={0}
