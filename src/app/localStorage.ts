@@ -20,15 +20,16 @@ export const getOneFavorite = (id: number | string): TJobsDate[] => {
 type TAdditionaAuthData = {
   expires_in: number;
   ttl: number;
+  token_type: string;
 };
 
-type TAuthData = Pick<IInitState, 'access_token' | 'refresh_token'>;
+export type TAuthData = Pick<IInitState, 'access_token' | 'refresh_token'> & TAdditionaAuthData;
 
 export const getAuthData = () => {
   const data = localStorage.getItem('paralect_data');
 
   if (data) {
-    const authData: TAuthData & TAdditionaAuthData = JSON.parse(data);
+    const authData: TAuthData = JSON.parse(data);
     return authData;
   }
 

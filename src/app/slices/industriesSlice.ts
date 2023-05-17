@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { afterAuthHeaders } from '../api';
+import { authHeaders } from '../api';
 
 interface IInitState {
   industries: TIndustiesData[];
@@ -48,7 +48,7 @@ export const fetchIndustries = createAsyncThunk<TIndustiesData[], [string]>(
   async ([URL], { rejectWithValue }) => {
     const response = await fetch(URL, {
       method: 'GET',
-      headers: { ...afterAuthHeaders },
+      headers: { ...authHeaders },
     });
 
     if (!response.ok) {

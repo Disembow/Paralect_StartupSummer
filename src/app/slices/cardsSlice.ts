@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TData, TJobsDate } from '../../types/dataType';
-import { afterAuthHeaders } from '../api';
+import { CLIENT_SECRET, X_SECRET_KEY } from '../api';
+import { getAuthData } from '../localStorage';
 
 export interface TFilters {
   select: number;
@@ -69,12 +70,19 @@ const cardsSlice = createSlice({
   },
 });
 
-export const fetchJobs = createAsyncThunk<TData, [string]>(
+export const fetchJobs = createAsyncThunk<TData, [string, string]>(
   'card/fetchJobs',
-  async ([URL], { rejectWithValue }) => {
+  async ([URL, key], { rejectWithValue }) => {
     const response = await fetch(URL, {
       method: 'GET',
-      headers: { ...afterAuthHeaders },
+      headers: {
+        'Content-Type': 'application/json',
+        'x-secret-key': X_SECRET_KEY,
+        'X-Api-App-Id': CLIENT_SECRET,
+        Authorization: getAuthData()
+          ? `${getAuthData()?.token_type} ${getAuthData()?.access_token}`
+          : `Bearer ${key}`,
+      },
     });
 
     if (!response.ok) {

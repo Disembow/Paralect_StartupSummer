@@ -1,10 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { authHeaders } from '../api';
+import { TAuthData } from '../localStorage';
 
 export interface IInitState {
   access_token: string;
   refresh_token: string;
   isLoading: boolean;
+  isAuth: boolean;
   error: string;
 }
 
@@ -12,6 +14,7 @@ const initialState: IInitState = {
   access_token: '',
   refresh_token: '',
   isLoading: false,
+  isAuth: false,
   error: '',
 };
 
@@ -26,6 +29,7 @@ const authSlice = createSlice({
       })
       .addCase(fetchAuth.fulfilled, (state, action) => {
         state.isLoading = false;
+        state.isAuth = !state.isAuth;
         state.access_token = action.payload.access_token;
         state.refresh_token = action.payload.refresh_token;
       })
@@ -36,7 +40,7 @@ const authSlice = createSlice({
   },
 });
 
-export const fetchAuth = createAsyncThunk<IInitState, [string]>(
+export const fetchAuth = createAsyncThunk<TAuthData, [string]>(
   'auth/fetchAuth',
   async ([URL], { rejectWithValue }) => {
     const response = await fetch(URL, {
@@ -48,7 +52,7 @@ export const fetchAuth = createAsyncThunk<IInitState, [string]>(
       return rejectWithValue('Ошибка авторизации');
     }
 
-    const data: IInitState = await response.json();
+    const data: TAuthData = await response.json();
     localStorage.setItem('paralect_data', JSON.stringify(data));
 
     return data;

@@ -10,6 +10,7 @@ import StyledPagination from './UI/StyledPagination';
 import { fetchIndustries } from '../../app/slices/industriesSlice';
 import { getURLString } from '../../app/api';
 import EmptyState from './UI/EmptyState';
+import { getAuthData } from '../../app/localStorage';
 
 const SearchPage = () => {
   const jobsData = useAppSelector((state) => state.cards.jobsData);
@@ -24,8 +25,10 @@ const SearchPage = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    const jobsURL = getURLString('filter', searchParams);
-    dispatch(fetchJobs([jobsURL]));
+    if (getAuthData()) {
+      const jobsURL = getURLString('filter', searchParams);
+      dispatch(fetchJobs([jobsURL]));
+    }
   }, [dispatch, searchParams]);
 
   return (
