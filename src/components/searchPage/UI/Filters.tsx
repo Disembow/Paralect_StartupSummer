@@ -1,11 +1,11 @@
 import React, { FC, useState } from 'react';
 import styles from './Filters.module.scss';
-import { NumberInput, Button } from '@mantine/core';
-import { IconSelector } from '@tabler/icons-react';
+import { Button } from '@mantine/core';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { TFilters, setSearchValue } from '../../../app/slices/cardsSlice';
 import FilterHeader from './FilterHeader';
 import FilterSelect from './FilterSelect';
+import FilterInput from './FilterInput';
 
 const Filters: FC = () => {
   const dispatch = useAppDispatch();
@@ -41,10 +41,6 @@ const Filters: FC = () => {
     lineHeight: '150%',
   };
 
-  const CustomIconSelector = () => {
-    return <IconSelector strokeWidth="1.25" color="#ACADB9" />;
-  };
-
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(setSearchValue({ ...params, keyword, page: 1 }));
@@ -68,6 +64,7 @@ const Filters: FC = () => {
   return (
     <form onSubmit={(e) => submitHandler(e)} className={styles.filters__container}>
       <FilterHeader clickHandler={clearAllFilters} />
+
       <FilterSelect
         onChange={(e) => selectChangeHandler(e)}
         labelProps={labelProps}
@@ -77,54 +74,35 @@ const Filters: FC = () => {
         placeholderStyle={placeholderStyle}
       />
 
-      <NumberInput
-        placeholder="От"
-        step={100}
-        min={0}
-        size="md"
-        labelProps={labelProps}
-        mb={'8px'}
+      <FilterInput
         label="Оклад"
-        radius={8}
-        rightSection={<CustomIconSelector />}
+        labelProps={labelProps}
+        placeholder="От"
         defaultValue={salaryFrom}
         value={params.salaryFrom}
-        styles={{
-          rightSection: { pointerEvents: 'none' },
-          input: {
-            '::placeholder': placeholderStyle,
-          },
-        }}
-        onChange={(e) => {
+        placeholderStyle={placeholderStyle}
+        onChange={(e: number | '') => {
           setParams({
             ...params,
             ...{ salaryFrom: e !== '' ? Number(e) : '' },
           });
         }}
       />
-      <NumberInput
+
+      <FilterInput
+        labelProps={labelProps}
         placeholder="До"
-        step={100}
-        min={0}
-        size="md"
-        mb={'18px'}
-        radius={8}
-        rightSection={<CustomIconSelector />}
         defaultValue={salaryTo}
         value={params.salaryTo}
-        styles={{
-          rightSection: { pointerEvents: 'none' },
-          input: {
-            '::placeholder': placeholderStyle,
-          },
-        }}
-        onChange={(e) => {
+        placeholderStyle={placeholderStyle}
+        onChange={(e: number | '') => {
           setParams({
             ...params,
             ...{ salaryTo: e !== '' ? Number(e) : '' },
           });
         }}
       />
+
       <Button type="submit" className={styles.button__submit}>
         Применить
       </Button>
