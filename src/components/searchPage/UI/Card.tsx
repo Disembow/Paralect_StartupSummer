@@ -2,6 +2,8 @@ import React, { FC, useEffect, useState } from 'react';
 import { setFavourits, getFavourits } from '../../../app/localStorage';
 import { TJobsDate } from '../../../types/dataType';
 import styles from './Card.module.scss';
+import { useAppDispatch } from '../../../app/hooks';
+import { setFavouritsCount } from '../../../app/slices/cardsSlice';
 
 const Card: FC<TJobsDate> = ({
   cardType,
@@ -17,6 +19,7 @@ const Card: FC<TJobsDate> = ({
 }) => {
   const [isFavourite, setIsFavourite] = useState<boolean>(false);
   const [card, setCard] = useState<TJobsDate | null>(null);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     setCard({
@@ -63,8 +66,9 @@ const Card: FC<TJobsDate> = ({
         setFavourits([card]);
       } else if (!isFavourite && currStorage) {
         setFavourits([card, ...currStorage]);
-      } else if (currStorage) {
+      } else {
         setFavourits(currStorage.filter((e) => e.id !== card?.id));
+        dispatch(setFavouritsCount(getFavourits().length));
       }
     }
   };

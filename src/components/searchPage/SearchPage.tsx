@@ -21,7 +21,6 @@ const SearchPage = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    console.log(industries.length > 0);
     if (industries.length === 0) {
       const industriesURL = getURLString('industries');
       dispatch(fetchIndustries([industriesURL]));

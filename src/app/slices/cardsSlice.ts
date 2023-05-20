@@ -19,6 +19,7 @@ interface IInitState {
   jobsCount: number;
   searchParams: TFilters;
   favouritsCurrPage: number;
+  favouritsCount: number;
 }
 
 const initialState: IInitState = {
@@ -28,6 +29,7 @@ const initialState: IInitState = {
   isBurgerOpen: false,
   jobsCount: 0,
   favouritsCurrPage: 1,
+  favouritsCount: 0,
   searchParams: {
     select: 0,
     salaryFrom: '',
@@ -49,6 +51,9 @@ const cardsSlice = createSlice({
     },
     setFavouritsCurrPage(state, action) {
       state.favouritsCurrPage = action.payload;
+    },
+    setFavouritsCount(state, action) {
+      state.favouritsCount = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -94,6 +99,7 @@ export const fetchJobs = createAsyncThunk<TData, [string, string]>(
   }
 );
 
-export const { setIsBurgerOpen, setSearchValue, setFavouritsCurrPage } = cardsSlice.actions;
+export const { setIsBurgerOpen, setSearchValue, setFavouritsCurrPage, setFavouritsCount } =
+  cardsSlice.actions;
 
 export default cardsSlice.reducer;
