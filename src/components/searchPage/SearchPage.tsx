@@ -16,13 +16,17 @@ const SearchPage = () => {
   const jobsData = useAppSelector((state) => state.cards.jobsData);
   const isLoading = useAppSelector((state) => state.cards.isLoading);
   const searchParams = useAppSelector((state) => state.cards.searchParams);
+  const industries = useAppSelector((state) => state.industries.industries);
   const { page } = searchParams;
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const industriesURL = getURLString('industries');
-    dispatch(fetchIndustries([industriesURL]));
-  }, [dispatch]);
+    console.log(industries.length > 0);
+    if (industries.length === 0) {
+      const industriesURL = getURLString('industries');
+      dispatch(fetchIndustries([industriesURL]));
+    }
+  }, [dispatch, industries]);
 
   useEffect(() => {
     if (getAuthData()) {
