@@ -23,7 +23,6 @@ const Vacancy = () => {
   }
 
   if (data.length > 0) {
-    console.log(data);
     const {
       id,
       profession,

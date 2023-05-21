@@ -28,11 +28,12 @@ const SearchPage = () => {
   }, [dispatch, industries]);
 
   useEffect(() => {
-    if (getAuthData()) {
+    if (getAuthData() && jobsData.length === 0) {
       const jobsURL = getURLString('filter', searchParams);
+      console.log('filter');
       dispatch(fetchJobs([jobsURL, '']));
     }
-  }, [dispatch, searchParams]);
+  }, [dispatch, searchParams, jobsData.length]);
 
   return (
     <>

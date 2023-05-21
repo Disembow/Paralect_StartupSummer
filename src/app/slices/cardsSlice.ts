@@ -48,6 +48,7 @@ const cardsSlice = createSlice({
     },
     setSearchValue(state, action) {
       state.searchParams = action.payload;
+      state.jobsData.length = 0;
     },
     setFavouritsCurrPage(state, action) {
       state.favouritsCurrPage = action.payload;
