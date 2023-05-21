@@ -28,8 +28,17 @@ const SearchBar = () => {
         onChange={(e) => setValue(e.target.value)}
         onKeyPress={(e) => handleKeyPress(e)}
         defaultValue={searchParams.keyword}
+        ff={'Inter'}
+        fw={400}
+        fz={'0.875rem'}
+        mb={'1rem'}
+        iconWidth={'2.25rem'}
+        radius="md"
         styles={{
           input: {
+            caretColor: '#5e96fc',
+            borderColor: '#eaebed',
+            height: '3rem',
             '::placeholder': {
               fontSize: '0.875rem',
               fontFamily: 'Inter',
@@ -38,8 +47,6 @@ const SearchBar = () => {
             ':hover': {
               borderColor: '#5e96fc',
             },
-            caretColor: '#5e96fc',
-            borderColor: '#eaebed',
           },
           wrapper: {
             '[data-with-icon]': {
@@ -50,15 +57,10 @@ const SearchBar = () => {
             padding: '0 0 0 0.35rem',
           },
         }}
-        ff={'Inter'}
-        fw={400}
-        fz={'0.875rem'}
-        mb={'1rem'}
-        iconWidth={'2.25rem'}
         rightSection={
           <Button
             type="button"
-            right={'1.7rem'}
+            right={'2.1rem'}
             h={'2rem'}
             w={'5.2rem'}
             radius={'0.5rem'}
@@ -72,8 +74,6 @@ const SearchBar = () => {
             Поиск
           </Button>
         }
-        radius="md"
-        size="lg"
       />
     </>
   );
