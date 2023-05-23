@@ -1,5 +1,11 @@
 @use '../../styles' as *;
 
+.root__layout {
+  @media (max-width: 1116px) {
+    padding: 0 0.5rem;
+  }
+}
+
 .header {
   width: 100%;
   background-color: $white;
