@@ -3,7 +3,7 @@ import { setFavourits, getFavourits } from '../../../app/localStorage';
 import { TJobsDate } from '../../../types/dataType';
 import styles from './Card.module.scss';
 import { useAppDispatch } from '../../../app/hooks';
-import { setFavouritsCount } from '../../../app/slices/cardsSlice';
+import { setFavouritsCount, setFavouritsCurrPage } from '../../../app/slices/cardsSlice';
 
 const Card: FC<TJobsDate> = ({
   cardType,
@@ -69,6 +69,9 @@ const Card: FC<TJobsDate> = ({
       } else {
         setFavourits(currStorage.filter((e) => e.id !== card?.id));
         dispatch(setFavouritsCount(getFavourits().length));
+        if (currStorage.length % 5 === 1) {
+          dispatch(setFavouritsCurrPage((currStorage.length - 1) / 5));
+        }
       }
     }
   };
