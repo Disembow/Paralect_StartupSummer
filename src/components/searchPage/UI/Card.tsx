@@ -70,7 +70,8 @@ const Card: FC<TJobsDate> = ({
         setFavourits(currStorage.filter((e) => e.id !== card?.id));
         dispatch(setFavouritsCount(getFavourits().length));
         if (currStorage.length % 5 === 1) {
-          dispatch(setFavouritsCurrPage((currStorage.length - 1) / 5));
+          const page = (currStorage.length - 1) / 5;
+          dispatch(setFavouritsCurrPage(page === 0 ? 1 : page));
         }
       }
     }
