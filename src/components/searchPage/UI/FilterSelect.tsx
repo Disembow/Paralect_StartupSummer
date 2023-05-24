@@ -8,7 +8,6 @@ interface IFilterSelect {
   labelProps: {
     style: {
       fontWeight: number;
-      fontFamily: string;
       marginBottom: string;
     };
   };

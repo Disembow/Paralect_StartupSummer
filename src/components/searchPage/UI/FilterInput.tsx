@@ -9,7 +9,6 @@ interface IFilterInput {
   labelProps: {
     style: {
       fontWeight: number;
-      fontFamily: string;
       marginBottom: string;
     };
   };

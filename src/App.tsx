@@ -6,7 +6,13 @@ import router from './components/layouts/router';
 
 const App = () => {
   return (
-    <MantineProvider withGlobalStyles withNormalizeCSS>
+    <MantineProvider
+      withGlobalStyles
+      withNormalizeCSS
+      theme={{
+        fontFamily: 'Inter, sans-serif',
+      }}
+    >
       <RouterProvider router={router} />
     </MantineProvider>
   );

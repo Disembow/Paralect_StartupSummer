@@ -29,13 +29,11 @@ const Filters: FC = () => {
   const labelProps = {
     style: {
       fontWeight: 700,
-      fontFamily: 'Inter',
       marginBottom: '0.42rem',
     },
   };
 
   const placeholderStyle = {
-    fontFamily: 'Inter',
     fontWeight: 400,
     fontSize: '0.875rem',
     margin: '0 0 0.5rem 0',

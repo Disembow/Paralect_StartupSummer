@@ -28,7 +28,6 @@ const SearchBar = () => {
         onChange={(e) => setValue(e.target.value)}
         onKeyPress={(e) => handleKeyPress(e)}
         defaultValue={searchParams.keyword}
-        ff={'Inter'}
         fw={400}
         fz={'0.875rem'}
         mb={'1rem'}
@@ -41,7 +40,6 @@ const SearchBar = () => {
             height: '3rem',
             '::placeholder': {
               fontSize: '0.875rem',
-              fontFamily: 'Inter',
               fontWeight: 400,
             },
             ':hover': {
@@ -64,7 +62,6 @@ const SearchBar = () => {
             h={'2rem'}
             w={'5.2rem'}
             radius={'0.5rem'}
-            ff={'Inter'}
             fw={600}
             lh={1.5}
             className={styles.search__button}
