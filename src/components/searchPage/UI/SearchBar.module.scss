@@ -1,0 +1,13 @@
+@use '../../../styles' as *;
+
+.search__button {
+  background-color: $blue500;
+
+  &:hover {
+    background-color: $blue600;
+  }
+
+  &:disabled {
+    background-color: $blue400;
+  }
+}

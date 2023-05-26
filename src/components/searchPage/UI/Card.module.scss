@@ -1,0 +1,134 @@
+@use '../../../styles' as *;
+
+.title {
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin: 2rem 0;
+  color: $black;
+}
+
+.cards__box {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.card__item_wrapper {
+  width: 100%;
+  cursor: pointer;
+}
+
+.card__item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 8.5625rem;
+  padding: 1.5rem;
+  background-color: $white;
+  border: 1px solid $grey200;
+  border-radius: 0.75rem;
+  line-height: 125%;
+}
+
+.vacancy__item {
+  font-weight: 600;
+}
+
+.vacancy__title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: $blue500;
+  line-height: 120%;
+
+  &_item {
+    color: $black;
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 1.03rem;
+  }
+}
+
+.vacancy__terms {
+  display: flex;
+  margin-bottom: 0.75rem;
+
+  &_item {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1.03rem;
+  }
+
+  @media (max-width: 991px) {
+    flex-direction: column;
+  }
+}
+
+.vacancy__schedule {
+  margin-left: 1.5rem;
+  font-weight: 400;
+
+  @media (max-width: 991px) {
+    margin: 0;
+  }
+
+  &::before {
+    content: '';
+    display: inline-block;
+    position: relative;
+    left: -0.75rem;
+    top: -0.2rem;
+    background-image: url('../../../assets/dot.png');
+    background-size: cover;
+    background-position: center;
+    width: 0.25rem;
+    height: 0.25rem;
+
+    @media (max-width: 991px) {
+      content: none;
+    }
+  }
+}
+
+.vacancy__location {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.location__image {
+  display: block;
+  background-image: url('../../../assets/location.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.location__name {
+  font-weight: 400;
+}
+
+.favorits__star {
+  &_empty,
+  &_filled {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    min-width: 1.48rem;
+    height: 1.48rem;
+    cursor: pointer;
+  }
+
+  &_empty {
+    background-image: url('../../../assets/States=Default.png');
+    &:hover {
+      background-image: url('../../../assets/States=Hover.png');
+    }
+  }
+
+  &_filled {
+    background-image: url('../../../assets/States=Pressed.png');
+  }
+}

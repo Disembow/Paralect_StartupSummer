@@ -1,0 +1,17 @@
+@use '../../styles' as *;
+
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 1.4375rem;
+  margin: 0 0 0 0.3125rem;
+
+  @media (max-width: 991px) {
+    flex-direction: column;
+    margin: 0;
+  }
+}
+
+.search {
+  width: 100%;
+}

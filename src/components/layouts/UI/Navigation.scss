@@ -1,0 +1,95 @@
+@use '../../../styles' as *;
+
+.navigation {
+  display: flex;
+  gap: 3.75rem;
+
+  &__row {
+    display: flex;
+
+    @media (max-width: 991px) {
+      display: none;
+    }
+  }
+
+  &__burger {
+    display: none;
+
+    @media (max-width: 991px) {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+  }
+
+  &__item {
+    text-decoration: none;
+
+    &:not(.active) {
+      color: $black;
+    }
+
+    &:hover {
+      color: $black;
+
+      &:not(.active) {
+        color: $blue600;
+      }
+    }
+
+    &:active {
+      color: $blue600 !important;
+    }
+  }
+}
+
+.active {
+  color: $blue500;
+}
+
+.burger__wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 12rem;
+  height: 12rem;
+  padding: 4rem 1.5rem;
+  margin: 0.5rem;
+  background-color: $white;
+  border: 1px solid $grey500;
+  border-radius: 0.5rem;
+  z-index: 1;
+  transform: translateY(-120%);
+  transition: 0.5s;
+}
+
+.burger__button {
+  z-index: 2;
+  display: none;
+
+  @media (max-width: 991px) {
+    display: block;
+  }
+}
+
+.open {
+  transform: translateY(0%);
+  transition: 0.5s;
+}
+
+.overlay {
+  &_visible {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    cursor: pointer;
+  }
+
+  &_invisible {
+    display: none;
+  }
+}

@@ -1,0 +1,43 @@
+@use '../../styles' as *;
+
+.root__layout {
+  @media (max-width: 1116px) {
+    padding: 0 0.5rem;
+  }
+}
+
+.header {
+  width: 100%;
+  background-color: $white;
+  margin-bottom: 2.5rem;
+  font-weight: 400;
+}
+
+.header__wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 5.25rem;
+}
+
+.header__wrapper,
+.main {
+  max-width: 69.75rem;
+  margin: 0 auto;
+}
+
+.header__wrapper {
+  max-width: 69.75rem;
+}
+
+.main {
+  max-width: 69.75rem;
+  padding-bottom: 0.01rem;
+}
+
+.empty {
+  display: block;
+  width: 8.56rem;
+}
